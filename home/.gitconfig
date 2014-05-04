@@ -1,0 +1,8 @@
+[user]
+	name = Byron Smith
+	email = bsmith89@gmail.com
+[github]
+	user = bsmith89
+	token = 8e028d8be22c10da2f2f790f851a2831
+[push]
+	default = simple

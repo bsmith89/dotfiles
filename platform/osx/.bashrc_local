@@ -1,0 +1,11 @@
+# Append /usr/local/bin to the front of the PATH for homebrew
+# as well as /usr/local/opt/coreutils/libexec/gnubin
+# for the homebrew installation of core GNU utils.
+export PATH=/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH
+
+# Append /usr/local/opt/coreutils/libexec/gnuman to the MANPATH
+# for the homebrew installation of core GNU utils.
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+
+alias fitness='cd ~/Documents/fitness'
+alias calories='cd ~/Documents/fitness; vim calories.tsv'

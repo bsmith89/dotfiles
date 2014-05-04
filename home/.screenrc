@@ -1,0 +1,15 @@
+# This file contains all of my universal screen startup commands.
+### <command> # <explanation>
+autodetach on # Autodetach session on hangup instead of terminating screen
+              # completely
+startup_message off # Turn of the splash screen
+defscrollback 30000 # Use a 30000 line scrollback buffer (do I really want
+                    # this?  Will it work while SSHing?  Will it slow down
+                    # screen?
+termcapinfo xterm ti@:te@
+# See <http://www.mattcutts.com/blog/screen-power-tips-screenrc/>
+# for more info on this one.  Will it work while SSHing?  Will it work with
+# Vim?  Other interactive programs in the terminal?
+
+# TODO: Improve my 'hardstatus alwayslastline ***" and 'status always ***'
+# commands

@@ -1,0 +1,2 @@
+alias scratch="cd /scratch/schmidt-fluxm"
+alias showqu="showq -u $USER"
