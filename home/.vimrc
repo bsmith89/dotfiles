@@ -86,7 +86,7 @@ imap <C-W> <C-O><C-W>
 " ==========================================================
 " Basic Settings
 " ==========================================================
-syntax on                     " syntax highlighing
+syntax enable                 " syntax highlighing
 set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
 set background=dark           " We are using dark background in vim
@@ -177,14 +177,11 @@ set incsearch               " Incrementally search while typing a /regex
 
 """" Display
 if has("gui_running")
-    colorscheme desert
+    set background=light
     " Remove menu bar
     set guioptions-=m
-
     " Remove toolbar
     set guioptions-=T
-else
-    colorscheme torte
 endif
 
 " Paste from clipboard
