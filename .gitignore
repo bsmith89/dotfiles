@@ -1,2 +1,4 @@
+build/
 backups/
-home/.vim/bundle/
+home/.vim/bundle/*
+home/.vim/mthesaur.txt

@@ -4,10 +4,6 @@ http://dotfiles.github.io/
 
 Enjoy!
 
-After git clone github.com/bsmith89/dotfiles
-Clone vundle: (a requirement)
-	git clone https://github.com/gmarik/Vundle.vim
-
 Usage:
 	Place dotfiles in home directory
 		make install
