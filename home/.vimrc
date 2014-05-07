@@ -33,6 +33,10 @@ Plugin 'msanders/snipmate.vim', {'name': 'snipmate'}
 Plugin 'hallison/vim-markdown', {'name': 'markdown'}
 Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
 Plugin 'dirkwallenstein/vim-autocomplpop', {'name': 'acp'}
+Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
+Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
+Plugin 'edsono/vim-matchit', {'name': 'matchit'}
+Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
 
 
 call vundle#end()

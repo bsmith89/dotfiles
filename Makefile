@@ -11,7 +11,7 @@ ifdef PLATFORM
 endif
 ALL_FILES=$(filter-out ${SRC_DIR}/. ${SRC_DIR}/.. ${PLATFORM_DIR}/. ${PLATFORM_DIR}/.. ,${SRC_FILES} ${PLATFORM_FILES})
 
-install:
+install: home/.vim/bundle/Vundle.vim
 	for source in ${ALL_FILES} ; do \
 		base=`basename $$source` ; \
 		echo Linking $$base ; \
@@ -24,6 +24,9 @@ install:
 		ln -sTf $$source $$target ; \
 	done
 	vim +PluginInstall +qall
+
+home/.vim/bundle/Vundle.vim:
+	git clone https://github.com/gmarik/Vundle.vim home/.vim/bundle/Vundle.vim
 
 restore:
 	# Return backed-up files to their original place
