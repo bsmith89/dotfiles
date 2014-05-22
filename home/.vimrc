@@ -29,6 +29,7 @@ Plugin 'L9'
 " plugins from github
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'msanders/snipmate.vim', {'name': 'snipmate'}
 Plugin 'hallison/vim-markdown', {'name': 'markdown'}
 Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
@@ -37,6 +38,13 @@ Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
 Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
 Plugin 'edsono/vim-matchit', {'name': 'matchit'}
 Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
+Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex', {'name': 'latex'}
+Plugin 'hsitz/VimOrganizer', {'name': 'orgmode'}
+
+" Plugins suggested by VimOrganizer
+Plugin 'mattn/calendar-vim', {'name': 'calendar'}
+Plugin 'utl.vim', {'name': 'utl'}
+Plugin 'NrrwRgn'
 
 
 call vundle#end()
@@ -44,7 +52,7 @@ filetype plugin indent on
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
-" Brief help
+" Brief Vundle help
 " :PluginList          - list configured plugins
 " :PluginInstall(!)    - install (update) plugins
 " :PluginSearch(!) foo - search (or refresh cache first) for foo
@@ -56,6 +64,7 @@ filetype plugin indent on
 
 set mouse=a
 let mapleader=","             " change the leader to be a comma vs slash
+
 
 " Correct the ':W  ->   command not found' error:
 " Seriously, guys. It's not like :W is bound to anything anyway.
@@ -116,8 +125,12 @@ set pumheight=6             " Keep a small completion window
 let g:acp_completeoptPreview=1
 
 " close preview window automatically when we move around
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" The bufname("%") condition is based on this
+" http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim#comment13028071_3107159
+" comment on an answer.  It prevents an error from occuring in the command
+" edit window.
+autocmd CursorMovedI * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
 
 " Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -160,8 +173,12 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " Show some info, even without statuslines.
 set laststatus=2            " Always show statusline, even if only 1 window.
-"set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})\ %{fugitive#statusline()}
-set statusline=[%l,%v\ %P%M]\ %f\ %r%h%w\ (%{&ff})
+set statusline=[%l,%v\ %P%M] " Position, modified
+set statusline+=\ %f " Filename tail
+set statusline+=\ %r%h%w " Flags
+set statusline+=(
+set statusline+=%{strlen(&ft)?&ft:'none'} " Filetype
+set statusline+=,\ %{&ff}) " Encoding
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
@@ -182,6 +199,7 @@ if has("gui_running")
     set guioptions-=m
     " Remove toolbar
     set guioptions-=T
+	set guifont=Menlo\ Regular:h16
 endif
 
 " Paste from clipboard
@@ -197,6 +215,8 @@ nnoremap <leader><space> :nohlsearch<cr>
 nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Add the virtualenv's site-packages to vim path
+" TODO: Does this really work?
+" TODO: Python3 Support
 if has('python')
 py << EOF
 import os.path
@@ -221,9 +241,6 @@ inoremap <C-e> <Esc>A
 
 set thesaurus+=$HOME/.vim/mthesaur.txt
 
-if filereadable(expand("~/.vimrc_local"))
-	source ~/.vimrc_local
-endif
 
 set statusline+=\ %{SyntasticStatuslineFlag()}
 let g:syntastic_check_on_open=1
@@ -267,4 +284,22 @@ else
   map <C-l> <C-w>l
 endif
 
+" Automatically insert the comment leader on subsequent lines.
 set formatoptions+=r
+
+" This line appears to be required for both correct highlighting and
+" the vim-latex plugin installed with Vundle.
+let g:tex_flavor = "latex"
+
+
+" Required for VimOrganizer (OrgMode clone) to function.
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+au  BufEnter                                 *.org  call org#SetOrgFileType()
+
+
+
+" Load a local vimrc if it exists.  This section should be after everything
+" in the vimrc.
+if filereadable(expand("~/.vimrc_local"))
+	source ~/.vimrc_local
+endif
