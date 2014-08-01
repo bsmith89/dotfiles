@@ -30,18 +30,22 @@ Plugin 'L9'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'msanders/snipmate.vim', {'name': 'snipmate'}
 Plugin 'hallison/vim-markdown', {'name': 'markdown'}
 Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
-Plugin 'dirkwallenstein/vim-autocomplpop', {'name': 'acp'}
 Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
 Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
 Plugin 'edsono/vim-matchit', {'name': 'matchit'}
 Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
 Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex', {'name': 'latex'}
-Plugin 'hsitz/VimOrganizer', {'name': 'orgmode'}
 
-" Plugins suggested by VimOrganizer
+" YouCompleteMe and suggested plugins.
+Plugin 'valloric/YouCompleteMe'  " Beastly completion engine
+Plugin 'SirVer/ultisnips'  " More advanced and works better with YCM than snipmate.
+Plugin 'honza/vim-snippets'  " Default snippets for UltiSnips
+Plugin 'ervandew/supertab'  " Helps UltiSnips and YouCompleteMe play nice
+
+" VimOrganizer and suggested plugins.
+Plugin 'hsitz/VimOrganizer', {'name': 'orgmode'}
 Plugin 'mattn/calendar-vim', {'name': 'calendar'}
 Plugin 'utl.vim', {'name': 'utl'}
 Plugin 'NrrwRgn'
@@ -79,8 +83,8 @@ let g:pep8_map='<leader>8'
 map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " open/close the quickfix window
-nmap <leader>c :copen<CR>
-nmap <leader>cc :cclose<CR>
+nmap <leader>e :copen<CR>
+nmap <leader>ee :cclose<CR>
 
 " ctrl-jklm  changes to that split
 map <c-j> <c-w>j
@@ -108,8 +112,11 @@ set wildmode=full             " <Tab> cycles between all matching choices.
 set noerrorbells
 set vb t_vb=
 
+" Open new splits below and to the right
+set splitbelow
+set splitright
 
-" Settings for autocompletion, managed by 'acp':
+" Settings for autocompletion, (was managed by 'acp'):
 " Ignore these files when completing
 set wildignore+=*.o,*.obj,.git,*.pyc
 set wildignore+=eggs/**
@@ -122,18 +129,34 @@ nnoremap <leader>. :lcd %:p:h<CR>
 " don't select first item, follow typing in autocomplete
 set completeopt=menuone,longest,preview
 set pumheight=6             " Keep a small completion window
-let g:acp_completeoptPreview=1
 
-" close preview window automatically when we move around
-" The bufname("%") condition is based on this
-" http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim#comment13028071_3107159
-" comment on an answer.  It prevents an error from occuring in the command
-" edit window.
-autocmd CursorMovedI * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
+" Options for YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
 
-" Select the item in the list with enter
+" I commented these lines out because I'm switching to a new autocomplete system.
+"let g:acp_completeoptPreview=1
+"" close preview window automatically when we move around
+"" The bufname("%") condition is based on this
+"" http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim#comment13028071_3107159
+"" comment on an answer.  It prevents an error from occuring in the command
+"" edit window.
+"autocmd CursorMovedI * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
+"autocmd InsertLeave * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
+"
+"" Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Fix the UltiSnips/YCM key-binding conflict
+" Based on http://stackoverflow.com/a/22253548/1951857
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 
 """ Moving Around/Editing
@@ -290,7 +313,8 @@ set formatoptions+=r
 " This line appears to be required for both correct highlighting and
 " the vim-latex plugin installed with Vundle.
 let g:tex_flavor = "latex"
-
+" And this one folds SCfigure environments in the "sidecap" package.
+let g:Tex_FoldedEnvironments = ",SCfigure"
 
 " Required for VimOrganizer (OrgMode clone) to function.
 au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
