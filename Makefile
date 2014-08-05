@@ -3,12 +3,14 @@ SRC_DIR=${PWD}/home
 HOME_DIR=${HOME}
 SRC_FILES=$(wildcard ${SRC_DIR}/*)
 SRC_FILES+=$(wildcard ${SRC_DIR}/.*)
+
 ifdef PLATFORM
-	$(info PLATFORM=${PLATFORM})
-	PLATFORM_DIR=${PWD}/platform/${PLATFORM}
-	PLATFORM_FILES=$(wildcard ${PLATFORM_DIR}/*)
-	PLATFORM_FILES+=$(wildcard ${PLATFORM_DIR}/.*)
+$(info PLATFORM=${PLATFORM})
+PLATFORM_DIR=${PWD}/platform/${PLATFORM}
+PLATFORM_FILES=$(wildcard ${PLATFORM_DIR}/*)
+PLATFORM_FILES+=$(wildcard ${PLATFORM_DIR}/.*)
 endif
+
 ALL_FILES=$(filter-out ${SRC_DIR}/. ${SRC_DIR}/.. \
 		               ${PLATFORM_DIR}/. ${PLATFORM_DIR}/.., \
 		               ${SRC_FILES} ${PLATFORM_FILES})
@@ -31,7 +33,7 @@ home/.vim/bundle/Vundle.vim:
 	git clone https://github.com/gmarik/Vundle.vim $@
 
 # If I'm not mistaken, this should make any required directories.
-%/:
+build/:
 	mkdir -p $@
 
 home/.vim/mthesaur.txt: build/mthesaur.txt
@@ -40,7 +42,7 @@ home/.vim/mthesaur.txt: build/mthesaur.txt
 # Using a bit of Make-foo: $(@D) is the directory part of the target
 # and $(@F) is the filename part.
 build/mthesaur.txt: | build/mthes10.zip
-	unzip -o -d $(@D) $^ $(@F)
+	unzip -o -d $(@D) $| $(@F)
 	touch $@
 
 build/mthes10.zip: | build/
