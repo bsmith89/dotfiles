@@ -4,16 +4,24 @@ http://dotfiles.github.io/
 
 Enjoy!
 
-Usage:
-	Place dotfiles in home directory
-		make install
-	
-	Restore original dotfiles in home directory
-		make restore
+##Usage
+Place dotfiles in home directory
+
+	make install
+
+Include platform specific files:
+
+	make install PLATFORM=[osx/flux/etc.]
+
+Restore original dotfiles in home directory
+
+	make restore
 
 
-TODO:
-maybe add https://github.com/Raimondi/delimitMate.git (figure out how to
-turn it off for most filetypes)
-Edit .vimrc to use solarized by default
-https://github.com/godlygeek/tabular
+##TODO
++ Vim
+	+ Thesaurus
+	+ Figure out keybindings for YCM and Ultisnips
+	+ Figure out path completion in python
++ Git
+	+ portable difflatex
