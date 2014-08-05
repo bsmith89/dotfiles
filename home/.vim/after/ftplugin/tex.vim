@@ -1,1 +1,1 @@
-vunmap ,
+silent! vunmap ,
