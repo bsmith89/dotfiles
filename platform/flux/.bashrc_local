@@ -1,2 +1,2 @@
-alias scratch="cd /scratch/schmidt-fluxm"
+alias scratch="cd /scratch/schmidt_fluxm"
 alias showqu="showq -u $USER"
