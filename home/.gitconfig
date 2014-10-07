@@ -6,3 +6,20 @@
 	token = 8e028d8be22c10da2f2f790f851a2831
 [push]
 	default = simple
+[color]
+	branch = auto
+	diff = auto
+	status = auto
+# Based on
+# http://tex.stackexchange.com/questions/1325/using-latexdiff-with-git
+#[difftool.latex]
+#	cmd = git-latexdiff "$LOCAL" "$REMOTE"
+#[difftool]
+#	prompt = false
+#[alias]
+#	latexdiff = difftool -t latex
+[core]
+	attributesfile = /Users/bjsmith/.gitattributes
+[filter "dropoutput_ipynb"]
+	clean = /Users/bjsmith/.local/bin/ipynb_output_filter.py
+	smudge = cat
