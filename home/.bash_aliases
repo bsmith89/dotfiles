@@ -41,7 +41,7 @@ alias view="vim -R"
 alias topu="top -U $USER"
 alias cl="column -s '	' -t"
 
-function tab {
+function table {
     cl $1 | less -S
 }
 
