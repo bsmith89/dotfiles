@@ -23,33 +23,35 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" plugins from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-
 " plugins from github
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'hallison/vim-markdown', {'name': 'markdown'}
-Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
-Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
 Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
-Plugin 'edsono/vim-matchit', {'name': 'matchit'}
-Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
-Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex', {'name': 'latex'}
 
 " YouCompleteMe and suggested plugins.
 Plugin 'valloric/YouCompleteMe'  " Beastly completion engine
 Plugin 'SirVer/ultisnips'  " More advanced and works better with YCM than snipmate.
 Plugin 'honza/vim-snippets'  " Default snippets for UltiSnips
 Plugin 'ervandew/supertab'  " Helps UltiSnips and YouCompleteMe play nice
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'jiangmiao/auto-pairs'
 
-" VimOrganizer and suggested plugins.
-Plugin 'hsitz/VimOrganizer', {'name': 'orgmode'}
-Plugin 'mattn/calendar-vim', {'name': 'calendar'}
-Plugin 'utl.vim', {'name': 'utl'}
-Plugin 'NrrwRgn'
-
+"Consider these in the future:
+"" plugins from http://vim-scripts.org/vim/scripts.html
+"Plugin 'L9'
+"" Other
+"Plugin 'scrooloose/nerdcommenter'
+"Plugin 'platicboy/vim-markdown', {'name': 'markdown'}
+"Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
+"Plugin 'edsono/vim-matchit', {'name': 'matchit'}
+"Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
+"Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex', {'name': 'latex'}
+"Plugin 'LaTeX-Box-Team/LaTeX-Box'
+"" VimOrganizer and suggested plugins.
+"Plugin 'hsitz/VimOrganizer', {'name': 'orgmode'}
+"Plugin 'mattn/calendar-vim', {'name': 'calendar'}
+"Plugin 'utl.vim', {'name': 'utl'}
+"Plugin 'NrrwRgn'
 
 call vundle#end()
 filetype plugin indent on
@@ -67,7 +69,6 @@ filetype plugin indent on
 
 
 set mouse=a
-let mapleader=","             " change the leader to be a comma vs slash
 
 
 " Correct the ':W  ->   command not found' error:
@@ -75,22 +76,6 @@ let mapleader=","             " change the leader to be a comma vs slash
 command! W :w
 " sudo write this
 cmap W! w !sudo tee % >/dev/null
-
-" Run pep8
-let g:pep8_map='<leader>8'
-
-" Reload Vimrc
-map <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
-" open/close the quickfix window
-nmap <leader>e :copen<CR>
-nmap <leader>ee :cclose<CR>
-
-" ctrl-jklm  changes to that split
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
 
 " and lets make these all work in insert mode too ( <C-O> makes next cmd
 "  happen as if in command mode )
@@ -116,14 +101,11 @@ set vb t_vb=
 set splitbelow
 set splitright
 
-" Settings for autocompletion, (was managed by 'acp'):
-" Ignore these files when completing
-set wildignore+=*.o,*.obj,.git,*.pyc
-set wildignore+=eggs/**
-set wildignore+=*.egg-info/**
-
-" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
+"" Settings for autocompletion, (was managed by 'acp'):
+"" Ignore these files when completing
+"set wildignore+=*.o,*.obj,.git,*.pyc
+"set wildignore+=eggs/**
+"set wildignore+=*.egg-info/**
 
 """ Insert completion
 " don't select first item, follow typing in autocomplete
@@ -133,16 +115,6 @@ set pumheight=6             " Keep a small completion window
 " Options for YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" I commented these lines out because I'm switching to a new autocomplete system.
-"let g:acp_completeoptPreview=1
-"" close preview window automatically when we move around
-"" The bufname("%") condition is based on this
-"" http://stackoverflow.com/questions/3105307/how-do-you-automatically-remove-the-preview-window-after-autocompletion-in-vim#comment13028071_3107159
-"" comment on an answer.  It prevents an error from occuring in the command
-"" edit window.
-"autocmd CursorMovedI * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
-"autocmd InsertLeave * if pumvisible() == 0 && bufname("%") != "[Command Line]"|pclose|endif
-"
 "" Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -157,7 +129,6 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
 
 """ Moving Around/Editing
 set cursorline              " have a line indicate the cursor location
@@ -205,7 +176,7 @@ set statusline+=,\ %{&ff}) " Encoding
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
-" What does this do?
+" This turns on the display defined above.
 set list
 
 """ Searching and Patterns
@@ -224,18 +195,6 @@ if has("gui_running")
     set guioptions-=T
 	set guifont=Menlo\ Regular:h16
 endif
-
-" Paste from clipboard
-map <leader>p "+p
-
-" Quit window on <leader>q
-nnoremap <leader>q :q<CR>
-
-" hide matches on <leader>space
-nnoremap <leader><space> :nohlsearch<cr>
-
-" Remove trailing whitespace on <leader>S
-nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 " Add the virtualenv's site-packages to vim path
 " TODO: Does this really work?
@@ -262,22 +221,19 @@ endif
 inoremap <C-a> <Esc>I
 inoremap <C-e> <Esc>A
 
-set thesaurus+=$HOME/.vim/mthesaur.txt
+"Make BASH style movement on the command line in ex: mode.
+cnoremap <C-a> <C-B>
+" <C-e> is already mapped to end of the command line.
 
 
 set statusline+=\ %{SyntasticStatuslineFlag()}
+set thesaurus+=$HOME/.vim/mthesaur.txt
 let g:syntastic_check_on_open=1
 let g:syntastic_auto_loc_list=0
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_loc_list_height=8
-
-nnoremap <leader>o :Errors<CR>
-nnoremap <leader>n :lnext<CR>
-nnoremap <leader>p :lprevious<CR>
-nnoremap <leader>x :lclose<CR>
-
 
 " Supposed to (w/ the corresponding changes to my .tmux.conf)
 " allow me to use vim keys for pane movements between both apps
