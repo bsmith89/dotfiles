@@ -24,6 +24,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " plugins from github
+Plugin 'bling/vim-airline', {'name': 'airline'}
+Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
+
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
@@ -70,10 +73,17 @@ filetype plugin indent on
 
 set mouse=a
 
+" Fix issues with mouse-resizing windows in TMUX
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
 
 " Correct the ':W  ->   command not found' error:
 " Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
+command! Wq :wq
+
 " sudo write this
 cmap W! w !sudo tee % >/dev/null
 
@@ -114,6 +124,8 @@ set pumheight=6             " Keep a small completion window
 
 " Options for YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
 
 "" Select the item in the list with enter
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -139,14 +151,17 @@ set scrolloff=3             " Keep 3 context lines above and below the cursor
 set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 set showmatch               " Briefly jump to a paren once it's balanced
 set nowrap                  " don't wrap text
-set linebreak               " don't wrap textin the middle of a word
+set linebreak               " don't wrap text in the middle of a word
 set autoindent              " always set autoindenting on
-set smartindent             " use smart indent if there is no indent file
-set tabstop=4               " <tab> inserts 4 spaces 
-set shiftwidth=4            " but an indent level is 2 (really?) spaces wide.
-set softtabstop=4           " <BS> over an autoindent deletes both spaces.
+"set cindent                 " use c style indent if there is no indent file
+set expandtab               " set noexpandtab for all filetypes needing tabs.
+set tabstop=4               " <tab> inserts this many spaces
+set shiftwidth=4            " an indent level is this many spaces wide.
+set softtabstop=4           " <BS> over an autoindent deletes a tabs-worth of
+                            " spaces.
 set shiftround              " rounds indent to a multiple of shiftwidth
 set matchpairs+=<:>         " show matching <> (html mainly) as well
+                            " Is this really necessary?
 set foldmethod=indent       " allow us to fold on indents
 set foldlevel=99            " don't fold by default
 
@@ -158,8 +173,7 @@ set modeline                " Allow vim options to be embedded in files;
 set modelines=5             " they must be within the first or last 5 lines.
 set ffs=unix,dos,mac        " Try recognizing dos, unix, and mac line endings.
 
-"""" Messages, Info, Status
-set ls=2                    " allways show status line
+""""" Messages, Info, Status
 set vb t_vb=                " Disable all bells.  I hate ringing/flashing.
 set confirm                 " Y-N-C prompt if closing with unsaved changes.
 set showcmd                 " Show incomplete normal mode commands as I type.
@@ -167,12 +181,13 @@ set report=0                " : commands always print changed line count.
 set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " Show some info, even without statuslines.
 set laststatus=2            " Always show statusline, even if only 1 window.
-set statusline=[%l,%v\ %P%M] " Position, modified
-set statusline+=\ %f " Filename tail
-set statusline+=\ %r%h%w " Flags
-set statusline+=(
-set statusline+=%{strlen(&ft)?&ft:'none'} " Filetype
-set statusline+=,\ %{&ff}) " Encoding
+"set statusline=[%l,%v\ %P%M] " Position, modified
+"set statusline+=\ %f " Filename tail
+"set statusline+=\ %r%h%w " Flags
+"set statusline+=(
+"set statusline+=%{strlen(&ft)?&ft:'none'} " Filetype
+"set statusline+=,\ %{&ff}) " Encoding
+
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:>-,eol:$,trail:-,precedes:<,extends:>
@@ -182,7 +197,7 @@ set list
 """ Searching and Patterns
 set ignorecase              " Default to using case insensitive searches,
 set smartcase               " unless uppercase letters are used in the regex.
-set smarttab                " Handle tabs more intelligently
+"set smarttab                " Handle tabs more intelligently
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
@@ -193,7 +208,7 @@ if has("gui_running")
     set guioptions-=m
     " Remove toolbar
     set guioptions-=T
-	set guifont=Menlo\ Regular:h16
+    set guifont=Droid\ Sans\ Mono\ for\ Powerline:h14
 endif
 
 " Add the virtualenv's site-packages to vim path
@@ -226,8 +241,9 @@ cnoremap <C-a> <C-B>
 " <C-e> is already mapped to end of the command line.
 
 
-set statusline+=\ %{SyntasticStatuslineFlag()}
 set thesaurus+=$HOME/.vim/mthesaur.txt
+
+"set statusline+=\ %{SyntasticStatuslineFlag()}
 let g:syntastic_check_on_open=1
 let g:syntastic_auto_loc_list=0
 let g:syntastic_enable_signs=1
@@ -266,17 +282,53 @@ endif
 " Automatically insert the comment leader on subsequent lines.
 set formatoptions+=r
 
-" This line appears to be required for both correct highlighting and
-" the vim-latex plugin installed with Vundle.
-let g:tex_flavor = "latex"
-" And this one folds SCfigure environments in the "sidecap" package.
-let g:Tex_FoldedEnvironments = ",SCfigure"
+"" Required for VimOrganizer (OrgMode clone) to function.
+"au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+"au  BufEnter                                 *.org  call org#SetOrgFileType()
 
-" Required for VimOrganizer (OrgMode clone) to function.
-au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
-au  BufEnter                                 *.org  call org#SetOrgFileType()
+" Close all folds except for folds which must be opened to see curser
+" position.
+nnoremap zV zMzv
+
+" Airline Config
+" enable/disable automatic population of the `g:airline_symbols` dictionary
+" with powerline symbols:
+let g:airline_powerline_fonts = 1
+" enable/disable enhanced tabline:
+let g:airline#extensions#tabline#enabled = 1
+" enable/disable displaying buffers with a single tab:
+let g:airline#extensions#tabline#show_buffers = 1
+" configure collapsing parent directories in buffer name:
+let g:airline#extensions#tabline#fnamecollapse = 1
+"set encoding=utf-8  " When do I want this?
 
 
+" Leader and it's mappings.
+let mapleader=","             " change the leader to be a comma vs slash
+nmap <leader>f :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+
+" Reload Vimrc
+nmap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" hide matches on <leader>space
+nnoremap <leader><space> :nohlsearch<cr>
+
+" Syntastic errors
+nnoremap <leader>o :Errors<CR>
+nnoremap <leader>e :lnext<CR>
+nnoremap <leader>y :lprevious<CR>
+nnoremap <leader>x :lclose<CR>
+
+"" Remove trailing whitespace on <leader>S
+"nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
+
+"" Set working directory
+"nnoremap <leader>. :lcd %:p:h<CR>
+"" How does this work, exactly?
+
+"" Paste from clipboard
+"map <leader>p "+p
 
 " Load a local vimrc if it exists.  This section should be after everything
 " in the vimrc.
