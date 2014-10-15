@@ -137,9 +137,6 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_collect_identifiers_from_tags_files = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 
-"" Select the item in the list with enter
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
 " Fix the UltiSnips/YCM key-binding conflict
 " Based on http://stackoverflow.com/a/22253548/1951857
 " make YCM compatible with UltiSnips (using supertab)

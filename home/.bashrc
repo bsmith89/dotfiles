@@ -115,15 +115,13 @@ if [ -f ~/.local/bin/git-completion.sh ]; then
 	source ~/.local/src/git-completion.sh
 fi
 
-# These lines are required for virtualenvwrapper to work correctly 
+# These lines are required for virtualenvwrapper to work correctly
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
+
 # Activate the default virtualenv.
 if [[ -e $HOME/.virtualenvs/default/bin/activate ]]; then
 	source $HOME/.virtualenvs/default/bin/activate
-	if [[ -e $HOME/.virtualenvs/default/bin/activate ]]; then
-		source $HOME/.virtualenvs/default/bin/virtualenvwrapper_lazy.sh
-	fi
 fi
 if [[ -e $HOME/.local/bin/virtualenvwrapper_lazy.sh ]]; then
 	source $HOME/.local/bin/virtualenvwrapper_lazy.sh
