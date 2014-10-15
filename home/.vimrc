@@ -36,15 +36,25 @@ Plugin 'valloric/YouCompleteMe'  " Beastly completion engine
 Plugin 'SirVer/ultisnips'  " More advanced and works better with YCM than snipmate.
 Plugin 'honza/vim-snippets'  " Default snippets for UltiSnips
 Plugin 'ervandew/supertab'  " Helps UltiSnips and YouCompleteMe play nice
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+
 Plugin 'jiangmiao/auto-pairs'
+" Plugin 'Raimondi/delimitMate'  " Alternative to auto-pairs
+
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown', {'name': 'markdown'}
+" --OR--
+"Plugin 'gabrielelana/vim-markdown', {'name': 'markdown'}
+" --OR--
+"Plugin 'vim-pandoc/vim-pandoc', {'name': 'pandoc'}
+"Plugin 'vim-pandoc/vim-pandoc-syntax', {'name': 'pandoc-syntax'}
+
+" Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 "Consider these in the future:
 "" plugins from http://vim-scripts.org/vim/scripts.html
 "Plugin 'L9'
 "" Other
 "Plugin 'scrooloose/nerdcommenter'
-"Plugin 'platicboy/vim-markdown', {'name': 'markdown'}
 "Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
 "Plugin 'edsono/vim-matchit', {'name': 'matchit'}
 "Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
