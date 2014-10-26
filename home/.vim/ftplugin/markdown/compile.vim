@@ -22,7 +22,7 @@ endif
 let s:OutputExtension = {'html': 'html',
                     \    'html5': 'html',
                     \    'latex': 'tex',
-                    \   }
+                    \    'docx': 'docx'}
 " \default values
 
 function! s:ConstructCompileCommand()
