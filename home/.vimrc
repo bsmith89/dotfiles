@@ -51,7 +51,7 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-pandoc/vim-pandoc', {'name': 'pandoc'}
 "Plugin 'vim-pandoc/vim-pandoc-syntax', {'name': 'pandoc-syntax'}
 
-" Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
 "Consider these in the future:
 "" plugins from http://vim-scripts.org/vim/scripts.html
