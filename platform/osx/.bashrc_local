@@ -9,3 +9,4 @@ export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 
 alias fitness='cd ~/Documents/fitness'
 alias calories='cd ~/Documents/fitness; vim calories.tsv'
+alias vim='nvim'

@@ -82,7 +82,7 @@ if [ -f $HOME/.bashrc_local ]; then
 fi
 
 # Set it so that the 'v' shortcut uses vim instead of vi
-export EDITOR=vim
+export EDITOR=nvim
 
 # Set it so that globbing includes hidden files but not the . and .. directories.
 export GLOBIGNORE=". .."

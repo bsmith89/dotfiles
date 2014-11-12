@@ -13,6 +13,9 @@
 set nocompatible              " Don't be compatible with vi
 filetype off
 
+if has('nvim')
+    runtime! python_setup.vim
+endif
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
