@@ -19,7 +19,7 @@
 #[alias]
 #	latexdiff = difftool -t latex
 [core]
-	attributesfile = /Users/bjsmith/.gitattributes
+	attributesfile = $HOME/.gitattributes
 [filter "dropoutput_ipynb"]
-	clean = /Users/bjsmith/.local/bin/ipynb_output_filter.py
+	clean = ipynb_output_filter.py
 	smudge = cat

@@ -1,38 +1,35 @@
+" My vim configuration.
 " https://github.com/bsmith89/dotfiles/
-" ==========================================================
-" Dependencies - Libraries/Applications outside of vim
-" ==========================================================
-" Pep8 - http://pypi.python.org/pypi/pep8
-" Pyflakes
-" Ack
 
-" ==========================================================
-" Plugins included
-" ==========================================================
 
 set nocompatible              " Don't be compatible with vi
 filetype off
 
-if has('nvim')
-    runtime! python_setup.vim
-endif
-
+" ==========================================================
+"  Plugins installed using Vundle
+" ==========================================================
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins:
 " call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" plugins from github
+" =================
+"  Visual Upgrades
+" =================
 Plugin 'bling/vim-airline', {'name': 'airline'}
 Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
 
+" ===================
+"  Environment Tools
+" ===================
+Plugin 'jmcantrell/vim-virtualenv', {'name': 'virtualenv'}
+
+" ===================
+"  Programming Tools
+" ===================
 Plugin 'scrooloose/syntastic'
-Plugin 'scrooloose/nerdtree'
-Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
 
 " YouCompleteMe and suggested plugins.
 Plugin 'valloric/YouCompleteMe'  " Beastly completion engine
@@ -41,9 +38,30 @@ Plugin 'honza/vim-snippets'  " Default snippets for UltiSnips
 Plugin 'ervandew/supertab'  " Helps UltiSnips and YouCompleteMe play nice
 
 Plugin 'jiangmiao/auto-pairs'
-" Plugin 'Raimondi/delimitMate'  " Alternative to auto-pairs
+" ---OR---
+"Plugin 'Raimondi/delimitMate'
 
-"Plugin 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
+"Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
+"Plugin 'edsono/vim-matchit', {'name': 'matchit'}
+
+"Plugin 'scrooloose/nerdcommenter'
+" ---OR---
+"Plugin 'tomtom/tcomment_vim', {'name': 'tcomment'}
+" ---OR---
+Plugin 'tpope/vim-commentary', {'name': 'commentary'}
+
+" =====================
+"  Navigation Upgrades
+" =====================
+Plugin 'scrooloose/nerdtree'
+Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
+Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
+
+
+" ==================
+"  Filetype Plugins
+" ==================
 "Plugin 'plasticboy/vim-markdown', {'name': 'markdown'}
 " --OR--
 "Plugin 'gabrielelana/vim-markdown', {'name': 'markdown'}
@@ -52,28 +70,13 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'vim-pandoc/vim-pandoc-syntax', {'name': 'pandoc-syntax'}
 
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
-
-"Consider these in the future:
-"" plugins from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-"" Other
-"Plugin 'scrooloose/nerdcommenter'
-"Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
-"Plugin 'edsono/vim-matchit', {'name': 'matchit'}
-"Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
+" --OR--
 "Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex', {'name': 'latex'}
-"Plugin 'LaTeX-Box-Team/LaTeX-Box'
-"" VimOrganizer and suggested plugins.
-"Plugin 'hsitz/VimOrganizer', {'name': 'orgmode'}
-"Plugin 'mattn/calendar-vim', {'name': 'calendar'}
-"Plugin 'utl.vim', {'name': 'utl'}
-"Plugin 'NrrwRgn'
+
+"Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
 
 call vundle#end()
 filetype plugin indent on
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
 " Brief Vundle help
 " :PluginList          - list configured plugins
 " :PluginInstall(!)    - install (update) plugins
@@ -108,13 +111,14 @@ imap <C-W> <C-O><C-W>
 " Basic Settings
 " ==========================================================
 syntax enable                 " syntax highlighing
+set synmaxcol=2048            " No syntax highlighting after 2048 columns
 set number                    " Display line numbers
 set numberwidth=1             " using only 1 column (and 1 space) while possible
 set background=dark           " We are using dark background in vim
 colorscheme solarized
 set title                     " show title in console title bar
 set wildmenu                  " Menu completion in command mode on <Tab>
-set wildmode=full             " <Tab> cycles between all matching choices.
+set wildmode=longest,list            " <Tab> cycles between all matching choices.
 
 " don't bell or blink
 set noerrorbells
@@ -174,6 +178,10 @@ set matchpairs+=<:>         " show matching <> (html mainly) as well
                             " Is this really necessary?
 set foldmethod=indent       " allow us to fold on indents
 set foldlevel=99            " don't fold by default
+set tags=./tags,./TAGS,tags;~,TAGS;~
+                            " Find tags files recursively up the file
+                            " hierarchy.
+
 
 """" Reading/Writing
 set noautowrite             " Never write a file unless I request it.
@@ -199,8 +207,9 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 "set statusline+=,\ %{&ff}) " Encoding
 
 
+set encoding=utf-8
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:>~,eol:$,trail:~,precedes:<,extends:>
+set listchars=tab:>~,eol:¶,trail:~,precedes:←,extends:→
 " This turns on the display defined above.
 set list
 
@@ -222,21 +231,18 @@ if has("gui_running")
     set guifont=Droid\ Sans\ Mono\ for\ Powerline:h14
 endif
 
-" Add the virtualenv's site-packages to vim path
-" TODO: Does this really work?
-" TODO: Python3 Support
-if has('python')
-py << EOF
-import os.path
-import sys
-import vim
-if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    sys.path.insert(0, project_base_dir)
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
-EOF
-endif
+"if has('python')
+"py << EOF
+"import os.path
+"import sys
+"import vim
+"if 'VIRTUAL_ENV' in os.environ:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    sys.path.insert(0, project_base_dir)
+"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"    execfile(activate_this, dict(__file__=activate_this))
+"EOF
+"endif
 
 " Load up virtualenv's vimrc if it exists
 if filereadable($VIRTUAL_ENV . '/.vimrc')
@@ -248,11 +254,11 @@ inoremap <C-a> <Esc>I
 inoremap <C-e> <Esc>A
 
 "Make BASH style movement on the command line in ex: mode.
-cnoremap <C-a> <C-B>
+cmap <C-a> <C-B>
 " <C-e> is already mapped to end of the command line.
 
-
 set thesaurus+=$HOME/.vim/mthesaur.txt
+
 
 "set statusline+=\ %{SyntasticStatuslineFlag()}
 let g:syntastic_check_on_open=1
@@ -311,7 +317,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 " configure collapsing parent directories in buffer name:
 let g:airline#extensions#tabline#fnamecollapse = 1
-"set encoding=utf-8  " When do I want this?
 
 
 " Leader and it's mappings.
@@ -325,14 +330,19 @@ nmap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vim
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<cr>
 
+if has("spell")
+    set spelllang=en_us
+    nmap <silent> <leader>s :set spell!
+endif
+
 " Syntastic errors
 nnoremap <leader>o :Errors<CR>
 nnoremap <leader>e :lnext<CR>
 nnoremap <leader>y :lprevious<CR>
 nnoremap <leader>x :lclose<CR>
 
-"" Remove trailing whitespace on <leader>S
-"nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
+" Remove trailing whitespace on <leader>S
+nnoremap <leader>S :%s/\s\+$//<cr>:let @/=''<CR>
 
 "" Set working directory
 "nnoremap <leader>. :lcd %:p:h<CR>
