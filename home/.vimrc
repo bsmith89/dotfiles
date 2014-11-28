@@ -6,86 +6,89 @@ set nocompatible              " Don't be compatible with vi
 filetype off
 
 " ==========================================================
-"  Plugins installed using Vundle
+"  Plugins installed using vim-pluge
 " ==========================================================
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins:
-" call vundle#begin('~/some/path/here')
-Plugin 'gmarik/Vundle.vim'
+" Auto-Install
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !mkdir -p ~/.vim/autoload
+  silent !curl -fLo ~/.vim/autoload/plug.vim
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall
+endif
 
+call plug#begin('~/.vim/bundle')
 " =================
 "  Visual Upgrades
 " =================
-Plugin 'bling/vim-airline', {'name': 'airline'}
-Plugin 'altercation/vim-colors-solarized', {'name': 'solarized'}
+Plug 'bling/vim-airline'
+Plug 'altercation/vim-colors-solarized'
 
 " ===================
 "  Environment Tools
 " ===================
-Plugin 'jmcantrell/vim-virtualenv', {'name': 'virtualenv'}
+Plug 'jmcantrell/vim-virtualenv'
+
+" ==================
+"  Versioning Tools
+" ==================
+Plug 'airblade/vim-gitgutter'
+" Figure out how to fix the gutter colorscheme.
 
 " ===================
 "  Programming Tools
 " ===================
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
 " YouCompleteMe and suggested plugins.
-Plugin 'valloric/YouCompleteMe'  " Beastly completion engine
-Plugin 'SirVer/ultisnips'  " More advanced and works better with YCM than snipmate.
-Plugin 'honza/vim-snippets'  " Default snippets for UltiSnips
-Plugin 'ervandew/supertab'  " Helps UltiSnips and YouCompleteMe play nice
+Plug 'valloric/YouCompleteMe', {'do': './install.sh'}
 
-Plugin 'jiangmiao/auto-pairs'
-" ---OR---
-"Plugin 'Raimondi/delimitMate'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
-Plugin 'godlygeek/tabular'
-"Plugin 'terryma/vim-expand-region', {'name': 'expand-region'}
-"Plugin 'edsono/vim-matchit', {'name': 'matchit'}
+"Makes YCM and UltiSnips work better together
+Plug 'ervandew/supertab'
 
-"Plugin 'scrooloose/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
 " ---OR---
-"Plugin 'tomtom/tcomment_vim', {'name': 'tcomment'}
+"Plug 'Raimondi/delimitMate'
+
+Plug 'godlygeek/tabular'
+"Plug 'terryma/vim-expand-region'
+"Plug 'edsono/vim-matchit'
+
+"Plug 'scrooloose/nerdcommenter'
 " ---OR---
-Plugin 'tpope/vim-commentary', {'name': 'commentary'}
+"Plug 'tomtom/tcomment_vim'
+" ---OR---
+Plug 'tpope/vim-commentary'
 
 " =====================
 "  Navigation Upgrades
 " =====================
-Plugin 'scrooloose/nerdtree'
-Plugin 'sjl/gundo.vim.git', {'name': 'gundo'}
-Plugin 'vim-scripts/taglist.vim', {'name': 'taglist'}
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/taglist.vim'
 
+"Plug 'sjl/gundo.vim'
+" ---OR---
+Plug 'mbbill/undotree'
 
 " ==================
 "  Filetype Plugins
 " ==================
-"Plugin 'plasticboy/vim-markdown', {'name': 'markdown'}
+"Plug 'plasticboy/vim-markdown'
 " --OR--
-"Plugin 'gabrielelana/vim-markdown', {'name': 'markdown'}
+"Plug 'gabrielelana/vim-markdown'
 " --OR--
-"Plugin 'vim-pandoc/vim-pandoc', {'name': 'pandoc'}
-"Plugin 'vim-pandoc/vim-pandoc-syntax', {'name': 'pandoc-syntax'}
+"Plug 'vim-pandoc/vim-pandoc'
+"Plug 'vim-pandoc/vim-pandoc-syntax'
 
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'LaTeX-Box-Team/LaTeX-Box'  ", {'for': ['tex', 'latex', 'plaintex']}
 " --OR--
-"Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex', {'name': 'latex'}
+"Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
-"Plugin 'vim-scripts/csv.vim', {'name': 'csv'}
+Plug 'vim-scripts/csv.vim'       ", {'for': 'csv'}
 
-call vundle#end()
-filetype plugin indent on
-" Brief Vundle help
-" :PluginList          - list configured plugins
-" :PluginInstall(!)    - install (update) plugins
-" :PluginSearch(!) foo - search (or refresh cache first) for foo
-" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
+call plug#end()
 
 set mouse=a
 
