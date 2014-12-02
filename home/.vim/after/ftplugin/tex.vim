@@ -1,7 +1,4 @@
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-
-" Override the default indentation settings file for \item
-let g:tex_indent_items = 0
+setlocal expandtab
+setlocal tabstop=2
+setlocal shiftwidth=2
+setlocal softtabstop=2
