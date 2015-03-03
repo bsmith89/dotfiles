@@ -38,12 +38,14 @@ alias ..="cd .."
 alias nmsq="grep -c '^>'"
 alias now="date +%r%n%a%t%D"
 alias view="vim -R"
+alias top="top -o cpu"
 alias topu="top -U $USER"
 alias cl="column -s '	' -t"
 
 function table {
     cl $1 | less -S
 }
+alias less="less -S"
 
 # SSH to local virtualbox
 # Must have setup and started a virtualbox guest
@@ -52,3 +54,8 @@ function table {
 vbox="${USER}@127.0.0.1"
 alias vbox-ssh="ssh -p 3022 ${vbox}"
 alias vbox-sshx="ssh -X -p 3022 ${vbox}"
+
+alias td="todo.sh"
+alias todo="todo.sh"
+
+alias activate_env="source venv/bin/activate"
