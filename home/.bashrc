@@ -31,6 +31,7 @@ fi
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
     xterm-color) color_prompt=yes;;
+    xterm-256color-italic) color_prompt=yes;;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -119,10 +120,15 @@ fi
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
 
-# Activate the default virtualenv.
-if [[ -e $HOME/.virtualenvs/default/bin/activate ]]; then
+
+# Load either the contents of $VIRTUAL_ENV (e.g. if a tmux session is loaded)
+# or activate the default environment.
+if [ -n "$VIRTUAL_ENV" ]; then
+  source "$VIRTUAL_ENV/bin/activate"
+elif [[ -e $HOME/.virtualenvs/default/bin/activate ]]; then
 	source $HOME/.virtualenvs/default/bin/activate
 fi
+
 if [[ -e $HOME/.local/bin/virtualenvwrapper_lazy.sh ]]; then
 	source $HOME/.local/bin/virtualenvwrapper_lazy.sh
 fi
@@ -132,3 +138,6 @@ fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
+if [[ -e $HOME/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh ]]; then
+   source $HOME/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
+fi
