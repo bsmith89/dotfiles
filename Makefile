@@ -15,7 +15,15 @@ ALL_FILES=$(filter-out ${SRC_DIR}/. ${SRC_DIR}/.. \
 		               ${PLATFORM_DIR}/. ${PLATFORM_DIR}/.., \
 		    ${SRC_FILES} ${PLATFORM_FILES})
 
-install: home/.vim/bundle/Vundle.vim home/.vim/mthesaur.txt
+install: _install tic
+
+tic: terminfo/*
+	@for file in $^ ; do \
+		echo "tic $$file" ; \
+		tic $$file ; \
+	done
+
+_install: home/.vim/mthesaur.txt
 	@for source in ${ALL_FILES} ; do \
 		base=`basename $$source` ; \
 		echo Linking $$base ; \

@@ -1,0 +1,16 @@
+# A screen-256color based TERMINFO that adds the escape sequences for italic.
+# Also fixes a problem with <C-h> in vim with kbs=...
+# See https://github.com/neovim/neovim/issues/2048
+#
+# Install:
+#
+#   tic screen-256color-italic.terminfo
+#
+# Usage:
+#
+#   export TERM=screen-256color-italic
+#
+screen-256color-italic|screen with 256 colors and italic,
+	sitm=\E[3m, ritm=\E[23m,
+    kbs=\177,
+	use=screen-256color,

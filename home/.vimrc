@@ -219,7 +219,11 @@ endif
 " ---OR---
 " Re: Plug:morhetz/gruvbox
 let g:gruvbox_italic=1
+let g:gruvbox_undercurl=0
 colorscheme gruvbox
+" Only because this one thing isn't working.  This is short-term fix...
+" See: https://github.com/neovim/neovim/issues/2098
+hi SpellBad cterm=underline
 
 set cursorline              " have a line indicate the cursor location
 
@@ -234,6 +238,10 @@ if has("spell")
 endif
 " --------------------------------------------------------------------------}}}
 "  Tags {{{
+
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 " -----------------------------------------------------------------------------
 set tags=./tags,./TAGS,tags;~,TAGS;~
                             " Find tags files recursively up the file
