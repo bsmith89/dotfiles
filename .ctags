@@ -1,0 +1,2 @@
+--exclude=home/.vim/bundle
+--exclude=home/.nvim/bundle
