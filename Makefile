@@ -13,7 +13,7 @@ endif
 
 ALL_FILES=$(filter-out ${SRC_DIR}/. ${SRC_DIR}/.. \
 		               ${PLATFORM_DIR}/. ${PLATFORM_DIR}/.., \
-		               ${SRC_FILES} ${PLATFORM_FILES})
+		    ${SRC_FILES} ${PLATFORM_FILES})
 
 install: home/.vim/bundle/Vundle.vim home/.vim/mthesaur.txt
 	@for source in ${ALL_FILES} ; do \
@@ -23,14 +23,12 @@ install: home/.vim/bundle/Vundle.vim home/.vim/mthesaur.txt
 		backup=${BACKUP_DIR}/$$base ; \
 		if [ -e "$$target" ] && [ ! -L "$$target" ]; then \
 			echo Backing up $$target first. ; \
+			echo "mv $$target $$backup" ; \
 			mv $$target $$backup ; \
 		fi ; \
 		ln -sTf $$source $$target ; \
 	done
-	vim +PluginInstall +qall
-
-home/.vim/bundle/Vundle.vim:
-	git clone https://github.com/gmarik/Vundle.vim $@
+	vim +PlugInstall +qall
 
 # If I'm not mistaken, this should make any required directories.
 build/:
