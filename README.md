@@ -21,7 +21,6 @@ Restore original dotfiles in home directory
 ##TODO
 + Vim
 	+ Thesaurus
-	+ Figure out keybindings for YCM and Ultisnips
 	+ Figure out path completion for several filetypes.
 + Git
 	+ portable difflatex

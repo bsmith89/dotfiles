@@ -1,4 +1,4 @@
-# Various aliases.  Sourced from .bashrc
+# Various aliases.  Sourced as the second-to-last thing from .bashrc
 
 
 alias ls='ls -Ap --color=auto'
@@ -58,4 +58,4 @@ alias vbox-sshx="ssh -X -p 3022 ${vbox}"
 alias td="todo.sh"
 alias todo="todo.sh"
 
-alias activate_env="source venv/bin/activate"
+alias activate_venv="source venv/bin/activate"

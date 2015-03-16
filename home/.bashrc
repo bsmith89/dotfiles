@@ -91,7 +91,7 @@ export MANPATH="$HOME/.local/share/man:$MANPATH"
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 
 # Set it so that the 'v' shortcut uses vim instead of vi
-export EDITOR=nvim
+export EDITOR=vim
 
 # Set it so that globbing includes hidden files but not the . and .. directories.
 export GLOBIGNORE=". .."
