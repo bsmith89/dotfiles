@@ -34,11 +34,13 @@ call plug#begin('~/.vim/bundle')
 "Plug 'edsono/vim-matchit'
 
 " -----------------------------------------------------------------------------
-" Plug 'altercation/vim-colors-solarized'
-" ---OR---
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
 " -----------------------------------------------------------------------------
+Plug 'altercation/vim-colors-solarized'
+" ---AND/OR---
 Plug 'morhetz/gruvbox'
+
+" Plug 'ludovicchabant/vim-gutentags'
 
 " -----------------------------------------------------------------------------
 "  Tags {{{2
@@ -129,9 +131,10 @@ Plug 'scrooloose/nerdtree'
 " -----------------------------------------------------------------------------
 
 " -----------------------------------------------------------------------------
-Plug 'jmcantrell/vim-virtualenv'
 "  IDE {{{2
 " -----------------------------------------------------------------------------
+Plug 'jmcantrell/vim-virtualenv'  " This does not seem to work currently.
+                                    " NO idea why.
 
 Plug 'airblade/vim-gitgutter'
 
@@ -139,16 +142,15 @@ Plug 'scrooloose/syntastic'
 
 Plug 'valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
 
+Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
 
-Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
-
-"Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 " ---OR---
-"Plug 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 " ---OR---
-Plug 'Townk/vim-autoclose'
+" Plug 'Townk/vim-autoclose'  " YCM claims that this causes bugs...
 
 Plug 'tpope/vim-surround'
 
@@ -183,6 +185,7 @@ call plug#end()
 " -----------------------------------------------------------------------------
 
 let mapleader=","             " change the leader to be a comma vs slash
+set noesckeys                 " No <Esc> imappings.  Instant escape.
 
 " -----------------------------------------------------------------------------
 "  Moving Around, Searching, and Patterns {{{2
@@ -197,6 +200,11 @@ set incsearch               " Incrementally search while typing a /regex
 
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<CR>
+
+" set t_ku=OA
+" set t_kd=OB
+" set t_kr=OC
+" set t_kl=OD
 
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
@@ -242,8 +250,8 @@ set linebreak               " don't wrap text in the middle of a word
 
 if has("spell")
     set spelllang=en_us
-    nmap <silent> <leader>s :set spell!<CR>
 endif
+nmap <leader>s :setlocal spell! spell?<CR>
 
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
@@ -330,8 +338,10 @@ inoremap <C-e> <Esc>A
 nnoremap <leader>q @q
 
 " Add lines above/below in normal mode
-nmap <S-Enter> O<Esc>
+nmap <S-CR> O<Esc>
 nmap <CR> o<Esc>
+
+nmap <leader>p :set paste!<CR>
 
 " -----------------------------------------------------------------------------
 "  Tabstops and Indentation {{{2
@@ -357,9 +367,9 @@ nnoremap zV zMzv
 " -----------------------------------------------------------------------------
 
 " -----------------------------------------------------------------------------
-set timeoutlen=500 ttimeoutlen=10
 "  Mapping {{{2
 " -----------------------------------------------------------------------------
+" set timeoutlen=500 ttimeoutlen=10
 
 " -----------------------------------------------------------------------------
 "  Reading and Writing Files {{{2
@@ -417,6 +427,9 @@ set encoding=utf-8
 " allow me to use vim keys for pane movements between both apps
 " http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits.html
 " TODO: Consider Plug:christoomey/vim-tmux-navigator
+
+" UltiSnips seems to interfere with <C-h>
+let g:UltiSnipsRemoveSelectModeMappings = 1
 if exists('$TMUX')
   function! TmuxOrSplitSwitch(wincmd, tmuxdir)
     let previous_winnr = winnr()
@@ -431,19 +444,22 @@ if exists('$TMUX')
   let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
   let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
   let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<cr>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<cr>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<cr>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<cr>
+  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<CR>
+  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<CR>
+  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<CR>
+  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<CR>
 else
-  map <C-h> <C-w>h
-  map <C-j> <C-w>j
-  map <C-k> <C-w>k
-  map <C-l> <C-w>l
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
 endif
 
 " Reload vimrc
 nmap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" Split vimrc
+nmap <leader>v :split ~/.vimrc<CR>
 
 " -----------------------------------------------------------------------------
 "  Plugin-Specific Configuration {{{2
@@ -483,6 +499,7 @@ let g:UltiSnipsExpandTrigger       = "<tab>"
 let g:UltiSnipsJumpForwardTrigger  = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
+" Re: Plug:scrooloose/nerdtree
 let NERDTreeShowHidden=1
 nmap <leader>f :NERDTreeToggle<CR>
 
