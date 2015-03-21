@@ -164,3 +164,6 @@ if [ -n "$VIRTUAL_ENV" ]; then
 elif [[ -e $HOME/.virtualenvs/default/bin/activate ]]; then
     source $HOME/.virtualenvs/default/bin/activate
 fi
+
+# # Is this necessary?
+# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig

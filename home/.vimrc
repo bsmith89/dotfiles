@@ -7,9 +7,13 @@
 " See github.com/bsmith89/dotfiles for more information.
 
 
-"  Important {{{1
+"  First {{{1
 " -----------------------------------------------------------------------------
-set nocompatible
+
+" Anything that needs to happen before everything else.
+" nocompatible should NOT need to be set, because the mere presence of
+" a .vimrc indicates as much.
+" set nocompatible
 
 " -----------------------------------------------------------------------------
 "  Plugins {{{1
@@ -75,6 +79,8 @@ Plug 'bling/vim-airline'
 " -----------------------------------------------------------------------------
 "  Editing Text {{{2
 " -----------------------------------------------------------------------------
+Plug 'tpope/vim-repeat'
+
 "Plug 'sjl/gundo.vim'
 " ---OR---
 Plug 'mbbill/undotree'
@@ -100,6 +106,9 @@ Plug 'wellle/targets.vim'  " Provides additional text objects
 " -----------------------------------------------------------------------------
 "  Reading and Writing Files {{{2
 " -----------------------------------------------------------------------------
+
+" Plug 'kien/ctrlp.vim'
+
 Plug 'scrooloose/nerdtree'
 
 " -----------------------------------------------------------------------------
@@ -133,7 +142,7 @@ Plug 'scrooloose/nerdtree'
 " -----------------------------------------------------------------------------
 "  IDE {{{2
 " -----------------------------------------------------------------------------
-Plug 'jmcantrell/vim-virtualenv'  " This does not seem to work currently.
+" Plug 'jmcantrell/vim-virtualenv'  " This does not seem to work currently.
                                     " NO idea why.
 
 Plug 'airblade/vim-gitgutter'
@@ -390,6 +399,7 @@ command! WQ   :wq
 command! -bang Q :q<bang>
 " sudo write this
 cmap W! w !sudo tee % >/dev/null
+
 " -----------------------------------------------------------------------------
 "  Swap File {{{2
 " -----------------------------------------------------------------------------
@@ -455,6 +465,7 @@ else
   nnoremap <C-l> <C-w>l
 endif
 
+" TODO: Make this source nvimrc not vimrc when appropriate
 " Reload vimrc
 nmap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
@@ -514,5 +525,10 @@ let g:syntastic_loc_list_height=8
 " Re: Plug:mbbill/undotree
 nnoremap <leader>u :UndotreeToggle<CR>
 
-" -----------------------------------------------------------------------------
+" " Re: Plug:kien/ctrlp.vim
+" let g:ctrlp_show_hidden=1
+" let g:ctrlp_follow_symlinks=2
 " ---------------------------END Configuration---------------------------------
+" -----------------------------------------------------------------------------
+" Finally {{{1
+" -----------------------------------------------------------------------------
