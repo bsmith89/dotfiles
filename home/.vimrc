@@ -532,3 +532,8 @@ nnoremap <leader>u :UndotreeToggle<CR>
 " -----------------------------------------------------------------------------
 " Finally {{{1
 " -----------------------------------------------------------------------------
+
+" Make this work for .nvimrc_local, too.
+if !empty(glob("~/.vimrc_local"))
+   source $home/.vimrc_local
+endif
