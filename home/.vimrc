@@ -44,11 +44,10 @@ Plug 'altercation/vim-colors-solarized'
 " ---AND/OR---
 Plug 'morhetz/gruvbox'
 
-" Plug 'ludovicchabant/vim-gutentags'
-
 " -----------------------------------------------------------------------------
 "  Tags {{{2
 " -----------------------------------------------------------------------------
+" Plug 'ludovicchabant/vim-gutentags'
 
 " -----------------------------------------------------------------------------
 "  Windows / Tabs {{{2
@@ -157,7 +156,7 @@ Plug 'eagletmt/neco-ghc'
 "  IDE {{{2
 " -----------------------------------------------------------------------------
 " Plug 'jmcantrell/vim-virtualenv'  " This does not seem to work currently.
-                                    " NO idea why.
+"                                   " NO idea why.
 
 Plug 'airblade/vim-gitgutter'
 
@@ -226,11 +225,6 @@ set incsearch               " Incrementally search while typing a /regex
 " hide matches on <leader>space
 nnoremap <leader><space> :nohlsearch<CR>
 
-" set t_ku=OA
-" set t_kd=OB
-" set t_kr=OC
-" set t_kl=OD
-
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
 " -----------------------------------------------------------------------------
@@ -295,7 +289,7 @@ set linebreak               " don't wrap text in the middle of a word
 if has("spell")
     set spelllang=en_us
 endif
-nnoremap <leader>s :setlocal spell! spell?<CR>
+nnoremap <leader>s :setlocal spell!<CR>
 
 " Display the highlight group on F10
 noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
@@ -322,6 +316,10 @@ set splitright
 "  Terminal {{{2
 " -----------------------------------------------------------------------------
 set title                     " show title in console title bar
+
+" TODO: Fix up this script so it actually works.
+" TODO: Build a generalizable way to call filters in ~/.vim/filters
+vnoremap <leader>gq :! ~/.vim/filters/proform<Enter>
 
 " -----------------------------------------------------------------------------
 "  Mouse {{{2
@@ -402,6 +400,9 @@ nnoremap <Right> o<Esc>
 
 nnoremap <leader>p :set paste!<CR>
 
+" " This doesn't work, but I want it to:
+" " Insert a non-breaking space on Shift-Space
+" nmap <S-Space> <C-k><Space><Space>
 
 " -----------------------------------------------------------------------------
 "  Tabstops and Indentation {{{2
@@ -559,6 +560,7 @@ nnoremap <leader>f :NERDTreeToggle<CR>
 " Re: Plug:scrooloose/syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_auto_loc_list=0
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
