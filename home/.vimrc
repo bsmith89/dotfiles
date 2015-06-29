@@ -53,6 +53,7 @@ Plug 'morhetz/gruvbox'
 " -----------------------------------------------------------------------------
 "  Windows / Tabs {{{2
 " -----------------------------------------------------------------------------
+Plug 'christoomey/vim-tmux-navigator'
 
 " -----------------------------------------------------------------------------
 "  Terminal {{{2
@@ -433,37 +434,6 @@ set encoding=utf-8
 " -----------------------------------------------------------------------------
 "  Miscellaneous {{{2
 " -----------------------------------------------------------------------------
-" Supposed to (w/ the corresponding changes to my .tmux.conf)
-" allow me to use vim keys for pane movements between both apps
-" http://www.codeography.com/2013/06/19/navigating-vim-and-tmux-splits.html
-" TODO: Consider Plug:christoomey/vim-tmux-navigator
-
-" UltiSnips seems to interfere with <C-h>
-let g:UltiSnipsRemoveSelectModeMappings = 1
-if exists('$TMUX')
-  function! TmuxOrSplitSwitch(wincmd, tmuxdir)
-    let previous_winnr = winnr()
-    execute "wincmd " . a:wincmd
-    if previous_winnr == winnr()
-      " The sleep and & gives time to get back to vim so tmux's focus tracking
-      " can kick in and send us our ^[[O
-      execute "silent !sh -c 'sleep 0.01; tmux select-pane -" . a:tmuxdir . "' &"
-      redraw!
-    endif
-  endfunction
-  let previous_title = substitute(system("tmux display-message -p '#{pane_title}'"), '\n', '', '')
-  let &t_ti = "\<Esc>]2;vim\<Esc>\\" . &t_ti
-  let &t_te = "\<Esc>]2;". previous_title . "\<Esc>\\" . &t_te
-  nnoremap <silent> <C-h> :call TmuxOrSplitSwitch('h', 'L')<CR>
-  nnoremap <silent> <C-j> :call TmuxOrSplitSwitch('j', 'D')<CR>
-  nnoremap <silent> <C-k> :call TmuxOrSplitSwitch('k', 'U')<CR>
-  nnoremap <silent> <C-l> :call TmuxOrSplitSwitch('l', 'R')<CR>
-else
-  nnoremap <C-h> <C-w>h
-  nnoremap <C-j> <C-w>j
-  nnoremap <C-k> <C-w>k
-  nnoremap <C-l> <C-w>l
-endif
 
 " TODO: Make this source nvimrc not vimrc when appropriate
 " Reload vimrc
