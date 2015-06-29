@@ -42,7 +42,7 @@ alias top="top -o cpu"
 alias topu="top -U $USER"
 alias cl="column -s '	' -t"
 
-function table {
+table() {
     cl $1 | less -S
 }
 alias less="less -S"

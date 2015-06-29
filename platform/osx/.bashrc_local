@@ -22,3 +22,28 @@ fi
 
 # This should fix tilde expansion for vim argument autocompletion
 complete -F _longopt vim
+
+clustalx_debug() {
+   /Applications/clustalx.app/Contents/MacOS/clustalx $*
+}
+clustalx() {
+   /Applications/clustalx.app/Contents/MacOS/clustalx $* >/dev/null 2>&1
+}
+figtree_debug() {
+    java -jar /Applications/FigTree\ v1.4.2.app/Contents/Resources/Java/figtree.jar $*
+}
+figtree() {
+    java -jar /Applications/FigTree\ v1.4.2.app/Contents/Resources/Java/figtree.jar $* >/dev/null 2>&1
+}
+aliview_debug() {
+    java -jar /Applications/AliView.app/Contents/Resources/Java/repo/AliView/AliView/1.17.1/AliView-1.17.1.jar $*
+}
+aliview() {
+    java -jar /Applications/AliView.app/Contents/Resources/Java/repo/AliView/AliView/1.17.1/AliView-1.17.1.jar $* >/dev/null 2>&1
+}
+
+seq-div() {
+    cd $HOME/Projects/seq-div
+    activate_venv
+    [ "$TMUX" ] || tmux attach || tmux
+}
