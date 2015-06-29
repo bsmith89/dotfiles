@@ -316,6 +316,11 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
+if has('nvim')  " TODO: Correct this
+    tnoremap <esc> <C-\><C-n>
+    tnoremap <C-\> <esc>
+endif
+
 " -----------------------------------------------------------------------------
 "  Printing {{{2
 " -----------------------------------------------------------------------------
@@ -361,10 +366,19 @@ inoremap <C-e> <Esc>A
 " Carry out the macro stored in the @q
 nnoremap <leader>q @q
 
-" Add lines above/below in normal mode
+" <Up>/<Down> to move the current line
+" TODO: Is this really necessary?
+nnoremap <Up> :move-2<CR>==
+nnoremap <Down> :move+<CR>==
 
-nnoremap <S-CR> O<Esc>
-nnoremap <CR> o<Esc>
+" Add lines above/below in normal mode
+nnoremap <Left> O<Esc>
+nnoremap <Right> o<Esc>
+" TODO: Map <S-Left>/<S-Right> to remove lines above and below *as long as
+" they're blank.
+" nmap <S-Left> k:'<,'>s:^\s\+$::<CR>
+" nmap <S-Right> j:'<,'>s:^\s\+$::<CR>
+" TODO: How do I get this to work?
 
 nnoremap <leader>p :set paste!<CR>
 
@@ -386,16 +400,37 @@ set shiftround              " rounds indent to a multiple of shiftwidth
 set foldmethod=marker       " TODO: Does this affect all files, or just ones
                             " where foldmethod isn't set?
 
+function! FoldColumnToggle()
+    if &foldcolumn > 0
+        echom "foldcolumn=0"
+        let &foldcolumn=0
+    else
+        echom "foldcolumn>0"
+        let &foldcolumn=1
+    endif
+    return &foldcolumn
+endfunction
+nnoremap <silent> <leader>F :call FoldColumnToggle()<CR>
+
 " Map zV to close surrounding folds
 nnoremap zV zMzv
 " -----------------------------------------------------------------------------
-"  Diff Mode {{{2
+"  Diff Mode
 " -----------------------------------------------------------------------------
+
+nnoremap <silent> <leader>D :DiffChangesDiffToggle<CR>
 
 " -----------------------------------------------------------------------------
 "  Mapping {{{2
 " -----------------------------------------------------------------------------
 " set timeoutlen=500 ttimeoutlen=10
+
+" May make typeing a 'j' slower.
+inoremap jk <ESC>
+
+" I don't really use ';' for anything anyway.
+nnoremap ; :
+nnoremap <leader>; ;
 
 " -----------------------------------------------------------------------------
 "  Reading and Writing Files {{{2
@@ -498,7 +533,7 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Re: Plug:scrooloose/nerdtree
 let NERDTreeShowHidden=1
-nmap <leader>f :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeToggle<CR>
 
 " Re: Plug:scrooloose/syntastic
 let g:syntastic_check_on_open=1
