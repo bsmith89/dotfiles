@@ -275,10 +275,11 @@ set linebreak               " don't wrap text in the middle of a word
 if has("spell")
     set spelllang=en_us
 endif
-nmap <leader>s :setlocal spell! spell?<CR>
+nnoremap <leader>s :setlocal spell! spell?<CR>
 
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+" Display the highlight group on F10
+noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
+\ . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " -----------------------------------------------------------------------------
@@ -361,10 +362,12 @@ inoremap <C-e> <Esc>A
 nnoremap <leader>q @q
 
 " Add lines above/below in normal mode
-nmap <S-CR> O<Esc>
-nmap <CR> o<Esc>
 
-nmap <leader>p :set paste!<CR>
+nnoremap <S-CR> O<Esc>
+nnoremap <CR> o<Esc>
+
+nnoremap <leader>p :set paste!<CR>
+
 
 " -----------------------------------------------------------------------------
 "  Tabstops and Indentation {{{2
@@ -412,7 +415,7 @@ command! Wq   :wq
 command! WQ   :wq
 command! -bang Q :q<bang>
 " sudo write this
-cmap W! w !sudo tee % >/dev/null
+cnoremap W! w !sudo tee % >/dev/null
 
 " -----------------------------------------------------------------------------
 "  Swap File {{{2
@@ -425,7 +428,7 @@ set wildmenu                  " menu completion in command mode on <Tab>
 set wildmode=longest,list            " <Tab> cycles between all matching choices.
 
 " BASH style movements on command line
-cmap <C-a> <C-B>
+cnoremap <C-a> <C-B>
 
 " -----------------------------------------------------------------------------
 "  Executing External Commands {{{2
@@ -450,10 +453,10 @@ set encoding=utf-8
 
 " TODO: Make this source nvimrc not vimrc when appropriate
 " Reload vimrc
-nmap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nnoremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " Split vimrc
-nmap <leader>v :split ~/.vimrc<CR>
+nnoremap <leader>v :split ~/.vimrc<CR>
 
 " -----------------------------------------------------------------------------
 "  Plugin-Specific Configuration {{{2
