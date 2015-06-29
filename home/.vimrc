@@ -54,10 +54,12 @@ Plug 'morhetz/gruvbox'
 "  Windows / Tabs {{{2
 " -----------------------------------------------------------------------------
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'sjl/vitality.vim'
 
 " -----------------------------------------------------------------------------
 "  Terminal {{{2
 " -----------------------------------------------------------------------------
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " -----------------------------------------------------------------------------
 "  Mouse {{{2
@@ -81,6 +83,7 @@ Plug 'bling/vim-airline'
 "  Editing Text {{{2
 " -----------------------------------------------------------------------------
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
 
 "Plug 'sjl/gundo.vim'
 " ---OR---
@@ -99,6 +102,8 @@ Plug 'wellle/targets.vim'  " Provides additional text objects
 " -----------------------------------------------------------------------------
 "  Diff Mode {{{2
 " -----------------------------------------------------------------------------
+
+Plug 'jmcantrell/vim-diffchanges'
 
 " -----------------------------------------------------------------------------
 "  Mapping {{{2
@@ -128,9 +133,17 @@ Plug 'scrooloose/nerdtree'
 "  Make / Quickfix {{{2
 " -----------------------------------------------------------------------------
 
+" Plug 'tpope/vim-dispatch'
+" ---OR---
+Plug 'benekastah/neomake'
+" ---OR---
+" Plug 'pgdouyon/vim-accio'
+
 " -----------------------------------------------------------------------------
 "  Language {{{2
 " -----------------------------------------------------------------------------
+
+Plug 'eagletmt/neco-ghc'
 
 " -----------------------------------------------------------------------------
 "  Special Characters {{{2
@@ -179,10 +192,12 @@ Plug 'tomtom/tcomment_vim'
 " --OR--
 "Plug 'gabrielelana/vim-markdown'
 " --OR--
-"Plug 'vim-pandoc/vim-pandoc'
-"Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
 
-"Plug 'LaTeX-Box-Team/LaTeX-Box'
+Plug 'lervag/vimtex'
+" --OR--
+" Plug 'LaTeX-Box-Team/LaTeX-Box'
 " --OR--
 "Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
@@ -472,6 +487,7 @@ cnoremap <C-a> <C-B>
 " -----------------------------------------------------------------------------
 "  Make / Quickfix {{{2
 " -----------------------------------------------------------------------------
+nnoremap <leader>m :w<CR>:Neomake!<CR>
 
 " -----------------------------------------------------------------------------
 "  Language {{{2
