@@ -58,4 +58,20 @@ alias vbox-sshx="ssh -X -p 3022 ${vbox}"
 alias td="todo.sh"
 alias todo="todo.sh"
 
-alias activate_venv="source venv/bin/activate"
+# alias activate_venv="source venv/bin/activate"
+activate_venv() {
+    local START_DIR=$PWD
+    local VENV="$1"
+    [ -z "$VENV" ] && VENV=venv
+    while [ ! -d "$VENV" ]; do
+        cd ..
+        if [ "$PWD" == "/" ]; then
+            cd "$START_DIR"
+            return 1
+        fi
+    done
+    source "${VENV}/bin/activate"
+    local OUTCODE="$?"
+    cd $START_DIR
+    return "$OUTCODE"
+}
