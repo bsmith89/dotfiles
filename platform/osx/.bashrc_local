@@ -14,6 +14,7 @@ alias vim='nvim'
 
 # Include Haskell bins
 export PATH=$HOME/.cabal/bin:$PATH
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
 # See `brew info bash-completion`.
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -41,6 +42,12 @@ aliview_debug() {
 aliview() {
     java -jar /Applications/AliView.app/Contents/Resources/Java/repo/AliView/AliView/1.17.1/AliView-1.17.1.jar $* >/dev/null 2>&1
 }
+
+export PHRED_PARAMETER_FILE=$HOME/.local/etc/phredpar.dat
+
+# Automatically appended by cpan initialization.
+PERL_MB_OPT="--install_base \"/Users/bjsmith/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/bjsmith/perl5"; export PERL_MM_OPT;
 
 seq-div() {
     cd $HOME/Projects/seq-div
