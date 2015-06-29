@@ -221,12 +221,26 @@ nnoremap <leader><space> :nohlsearch<CR>
 " -----------------------------------------------------------------------------
 syntax enable                 " syntax highlighing
 set synmaxcol=2048            " no syntax highlighting after 2048 columns
-set number                    " display line numbers
+
+" Use relative line numbering when focused on the pane in normal mode.
+set number
+set relativenumber
+augroup linenumbers
+    autocmd!
+    autocmd FocusLost * :set norelativenumber
+    autocmd FocusGained * :set relativenumber
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber
+    autocmd WinEnter * :set relativenumber
+    autocmd WinLeave * :set norelativenumber
+augroup END
 set numberwidth=1             " using only 1 column (and 1 space) while possible
+
+
 set colorcolumn=79
 
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:>~,eol:¶,trail:~,precedes:←,extends:→
+set listchars=tab:›―,eol:¶,trail:–,precedes:⋘,extends:⋙,nbsp:‿
 " This turns on the display defined above.
 set list
 
@@ -338,7 +352,6 @@ set backspace=2             " Allow backspacing over autoindent, EOL, and BOL
 " Automatically insert the comment leader on subsequent lines.
 set formatoptions+=r
 
-set matchpairs+=<:>         " show matching <> (html mainly) as well
 set showmatch               " Briefly jump to a paren once it's balanced
 
 inoremap <C-a> <Esc>I
