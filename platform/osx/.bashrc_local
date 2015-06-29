@@ -14,3 +14,11 @@ alias vim='nvim'
 
 # Include Haskell bins
 export PATH=$HOME/.cabal/bin:$PATH
+
+# See `brew info bash-completion`.
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
+# This should fix tilde expansion for vim argument autocompletion
+complete -F _longopt vim

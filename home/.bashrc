@@ -108,13 +108,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# git-completion can be found here:
-# https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-# Must be downloaded to ~/.local/src
-if [ -f ~/.local/bin/git-completion.sh ]; then
-	source ~/.local/src/git-completion.sh
-fi
-
 # These lines are required for virtualenvwrapper to work correctly
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Projects
