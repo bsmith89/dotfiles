@@ -234,6 +234,11 @@ nnoremap <leader><space> :nohlsearch<CR>
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
 " -----------------------------------------------------------------------------
+
+" TODO: Why don't FocusGained and FocusLost work??
+autocmd FocusGained * :echom "Focus gained!"
+autocmd FocusLost * :echom "Focus lost!"
+
 syntax enable                 " syntax highlighing
 set synmaxcol=2048            " no syntax highlighting after 2048 columns
 
