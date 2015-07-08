@@ -272,7 +272,7 @@ endif
 " colorscheme solarized
 " ---OR---
 " Re: Plug:morhetz/gruvbox
-let g:gruvbox_italic=1
+let g:gruvbox_italic=0
 let g:gruvbox_undercurl=0
 colorscheme gruvbox
 " Only because this one thing isn't working.  This is short-term fix...
