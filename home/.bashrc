@@ -160,3 +160,10 @@ fi
 
 # # Is this necessary?
 # export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
+
+LOCAL_BASH_COMPL=$HOME/.local/etc/bash_completion
+if [ -d "$LOCAL_BASH_COMPL" ]; then
+    for script in "$LOCAL_BASH_COMPL"/*; do
+        source "$script"
+    done
+fi
