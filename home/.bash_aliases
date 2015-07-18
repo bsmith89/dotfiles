@@ -41,9 +41,14 @@ alias view="vim -R"
 alias top="top -o cpu"
 alias topu="top -U $USER"
 alias cl="column -s '	' -t"
+alias clt=cl
+alias cl,="column -s ',' -t"
 
 table() {
     cl $1 | less -S
+}
+tablet() {
+    clt $1 | less -S
 }
 alias less="less -S"
 
