@@ -5,5 +5,5 @@ syn sync minlines=100
 syntax clear markdownCodeBlock
 
 " I want list markers to work at any depth
-syn match markdownListMarker "\%(\t\| *\)[-*+]\%(\s\+\S\)\@=" contained
-syn match markdownOrderedListMarker "\%(\t\| *\)\<\d\+\.\%(\s\+\S\)\@=" contained
+syn match markdownListMarker "\%(\t*\| *\)[-*+]\%(\s\+\S\)\@=" contained
+syn match markdownOrderedListMarker "\%(\t*\| *\)\<\d\+\.\%(\s\+\S\)\@=" contained
