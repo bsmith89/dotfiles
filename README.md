@@ -24,3 +24,8 @@ Restore original dotfiles in home directory
 	+ Figure out path completion for several filetypes.
 + Git
 	+ portable difflatex
+
+
+## NOTES
+
+For fixing problems maping <C-H> in vim, see https://github.com/neovim/neovim/issues/2048#issuecomment-78045837

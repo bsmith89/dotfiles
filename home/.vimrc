@@ -40,8 +40,9 @@ call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
 " -----------------------------------------------------------------------------
-Plug 'altercation/vim-colors-solarized'
-" ---AND/OR---
+" Plug 'flazz/vim-colorschemes'
+" Plug 'altercation/vim-colors-solarized'
+" " ---AND/OR---
 Plug 'morhetz/gruvbox'
 
 " -----------------------------------------------------------------------------
@@ -52,6 +53,7 @@ Plug 'morhetz/gruvbox'
 " -----------------------------------------------------------------------------
 "  Windows / Tabs {{{2
 " -----------------------------------------------------------------------------
+" TODO: Figure out why <C-H> doesn't work.
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'sjl/vitality.vim'
 
@@ -83,6 +85,7 @@ Plug 'bling/vim-airline'
 " -----------------------------------------------------------------------------
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
+Plug 'godlygeek/tabular'
 
 "Plug 'sjl/gundo.vim'
 " ---OR---
@@ -159,11 +162,12 @@ Plug 'eagletmt/neco-ghc'
 "                                   " NO idea why.
 
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/syntastic'
 
 Plug 'valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
-
+"
 Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
@@ -184,6 +188,8 @@ Plug 'tomtom/tcomment_vim'
 " ---OR---
 "Plug 'tpope/vim-commentary'
 
+Plug 'ivanov/vim-ipython'
+
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
 " -----------------------------------------------------------------------------
@@ -193,6 +199,9 @@ Plug 'tomtom/tcomment_vim'
 " --OR--
 " Plug 'vim-pandoc/vim-pandoc'
 " Plug 'vim-pandoc/vim-pandoc-syntax'
+" --OR--
+" For just a few more recent commits (is this really necessary?)
+Plug 'tpope/vim-markdown'
 
 Plug 'lervag/vimtex'
 " --OR--
@@ -204,7 +213,7 @@ Plug 'chrisbra/csv.vim'
 "
 " -----------------------------------------------------------------------------
 call plug#end()
-" --------------------------------END Plugins----------------------------------
+" --------------------------------END Plugins--------------------------------- }-
 "  Configuration {{{1
 " -----------------------------------------------------------------------------
 
@@ -222,21 +231,32 @@ set smartcase               " unless uppercase letters are used in the regex.
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
-" hide matches on <leader>space
-nnoremap <leader><space> :nohlsearch<CR>
+" hide matches on <Leader>space
+nnoremap <Leader><space> :nohlsearch<CR>
 
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
 " -----------------------------------------------------------------------------
-
-" TODO: Why don't FocusGained and FocusLost work??
-autocmd FocusGained * :echom "Focus gained!"
-autocmd FocusLost * :echom "Focus lost!"
+"
+" " FocusGained and FocusLost only works in classic vim, not nvim
+" augroup testfocus
+"     autocmd!
+"     autocmd FocusLost   * :echom "set focus lost"
+"     autocmd FocusGained * :echom "set focus gained"
+"     autocmd InsertEnter * :echom "set insert enter"
+"     autocmd InsertLeave * :echom "set insert leave"
+"     autocmd WinEnter    * :echom "set win enter"
+"     autocmd WinLeave    * :echom "set win leave"
+"     autocmd CmdwinEnter * :echom "set cmdwin enter"
+"     autocmd CmdwinLeave * :echom "set cmdwin leave"
+" augroup END
 
 syntax enable                 " syntax highlighing
 set synmaxcol=2048            " no syntax highlighting after 2048 columns
 
-" Use relative line numbering when focused on the pane in normal mode.
+" Use relative line numbering when focused on the pane/window in normal mode.
+" TODO: Show absolute number when I'm on the command line
+" is that even possible?
 set number
 set relativenumber
 augroup linenumbers
@@ -247,6 +267,8 @@ augroup linenumbers
     autocmd InsertLeave * :set relativenumber
     autocmd WinEnter * :set relativenumber
     autocmd WinLeave * :set norelativenumber
+    autocmd CmdwinEnter * :set norelativenumber
+    autocmd CmdwinLeave * :set relativenumber
 augroup END
 set numberwidth=1             " using only 1 column (and 1 space) while possible
 
@@ -289,7 +311,7 @@ set linebreak               " don't wrap text in the middle of a word
 if has("spell")
     set spelllang=en_us
 endif
-nnoremap <leader>s :setlocal spell!<CR>
+nnoremap <Leader>s :setlocal spell!<CR>
 
 " Display the highlight group on F10
 noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
@@ -319,7 +341,7 @@ set title                     " show title in console title bar
 
 " TODO: Fix up this script so it actually works.
 " TODO: Build a generalizable way to call filters in ~/.vim/filters
-vnoremap <leader>gq :! ~/.vim/filters/proform<Enter>
+vnoremap <Leader>gq :! ~/.vim/filters/proform<Enter>
 
 " -----------------------------------------------------------------------------
 "  Mouse {{{2
@@ -334,9 +356,10 @@ if &term =~ '^screen'
     set ttymouse=xterm2
 endif
 
-if has('nvim')  " TODO: Correct this
-    tnoremap <esc> <C-\><C-n>
-    tnoremap <C-\> <esc>
+" TODO: has('terminfo') or something
+if exists(':tmap')
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <C-\> <Esc>
 endif
 
 " -----------------------------------------------------------------------------
@@ -381,24 +404,29 @@ set showmatch               " Briefly jump to a paren once it's balanced
 inoremap <C-a> <Esc>I
 inoremap <C-e> <Esc>A
 
+" TODO: In visual modes, surround with 's' and replace with 'S'
+
+" Delete whole words on <M-BS>
+imap <M-BS> <Esc>dbi
+
 " Carry out the macro stored in the @q
-nnoremap <leader>q @q
+nnoremap <Leader>q @q
 
-" <Up>/<Down> to move the current line
-" TODO: Is this really necessary?
-nnoremap <Up> :move-2<CR>==
-nnoremap <Down> :move+<CR>==
+" " <Up>/<Down> to move the current line
+" " TODO: Is this really necessary?
+" nnoremap <Up> :move-2<CR>==
+" nnoremap <Down> :move+<CR>==
 
-" Add lines above/below in normal mode
-nnoremap <Left> O<Esc>
-nnoremap <Right> o<Esc>
-" TODO: Map <S-Left>/<S-Right> to remove lines above and below *as long as
-" they're blank.
+" " Add lines above/below in normal mode
+" nnoremap <Left> O<Esc>
+" nnoremap <Right> o<Esc>
+" " TODO: Map <S-Left>/<S-Right> to remove lines above and below *as long as
+" " they're blank.
 " nmap <S-Left> k:'<,'>s:^\s\+$::<CR>
 " nmap <S-Right> j:'<,'>s:^\s\+$::<CR>
-" TODO: How do I get this to work?
+" " TODO: How do I get this to work?
 
-nnoremap <leader>p :set paste!<CR>
+nnoremap <Leader>p :set paste!<CR>
 
 " " This doesn't work, but I want it to:
 " " Insert a non-breaking space on Shift-Space
@@ -431,7 +459,7 @@ function! FoldColumnToggle()
     endif
     return &foldcolumn
 endfunction
-nnoremap <silent> <leader>F :call FoldColumnToggle()<CR>
+nnoremap <silent> <Leader>F :call FoldColumnToggle()<CR>
 
 " Map zV to close surrounding folds
 nnoremap zV zMzv
@@ -439,7 +467,7 @@ nnoremap zV zMzv
 "  Diff Mode
 " -----------------------------------------------------------------------------
 
-nnoremap <silent> <leader>D :DiffChangesDiffToggle<CR>
+nnoremap <silent> <Leader>D :DiffChangesDiffToggle<CR>
 
 " -----------------------------------------------------------------------------
 "  Mapping {{{2
@@ -447,11 +475,11 @@ nnoremap <silent> <leader>D :DiffChangesDiffToggle<CR>
 " set timeoutlen=500 ttimeoutlen=10
 
 " May make typeing a 'j' slower.
-inoremap jk <ESC>
+inoremap jk <Esc>
 
 " I don't really use ';' for anything anyway.
 nnoremap ; :
-nnoremap <leader>; ;
+nnoremap <Leader>; ;
 
 " -----------------------------------------------------------------------------
 "  Reading and Writing Files {{{2
@@ -493,7 +521,7 @@ cnoremap <C-a> <C-B>
 " -----------------------------------------------------------------------------
 "  Make / Quickfix {{{2
 " -----------------------------------------------------------------------------
-nnoremap <leader>m :w<CR>:Neomake!<CR>
+nnoremap <Leader>m :w<CR>:Neomake!<CR>
 
 " -----------------------------------------------------------------------------
 "  Language {{{2
@@ -510,10 +538,12 @@ set encoding=utf-8
 
 " TODO: Make this source nvimrc not vimrc when appropriate
 " Reload vimrc
-nnoremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+nnoremap <silent> <Leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
-" Split vimrc
-nnoremap <leader>v :split ~/.vimrc<CR>
+" Open vimrc as a split
+nnoremap <Leader>v :split ~/.vimrc<CR>
+" Open after/ftplugin/ft.vim in a split
+nnoremap <Leader>b :split `="$HOME/.vim/after/ftplugin/" . &ft . ".vim"`<CR>
 
 " -----------------------------------------------------------------------------
 "  Plugin-Specific Configuration {{{2
@@ -549,13 +579,13 @@ let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
 " Re: Plug:SirVer/ultisnips
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger       = "<tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:UltiSnipsExpandTrigger       = "<Tab>"
+let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
 
 " Re: Plug:scrooloose/nerdtree
 let NERDTreeShowHidden=1
-nnoremap <leader>f :NERDTreeToggle<CR>
+nnoremap <Leader>f :NERDTreeToggle<CR>
 
 " Re: Plug:scrooloose/syntastic
 let g:syntastic_check_on_open=1
@@ -567,11 +597,16 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_loc_list_height=8
 
 " Re: Plug:mbbill/undotree
-nnoremap <leader>u :UndotreeToggle<CR>
+nnoremap <Leader>u :UndotreeToggle<CR>
 
 " " Re: Plug:kien/ctrlp.vim
 " let g:ctrlp_show_hidden=1
 " let g:ctrlp_follow_symlinks=2
+
+" Re: Plug:'godlygeek/tabular'
+nnoremap <Leader>\ :Tabularize /\| <CR>
+
+
 " ---------------------------END Configuration---------------------------------
 " -----------------------------------------------------------------------------
 " Finally {{{1
