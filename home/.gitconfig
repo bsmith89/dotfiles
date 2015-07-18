@@ -20,6 +20,10 @@
 #	latexdiff = difftool -t latex
 [core]
 	attributesfile = $HOME/.gitattributes
+	pager = less -x4
 [filter "dropoutput_ipynb"]
 	clean = ipynb_output_filter.py
 	smudge = cat
+[rerere]
+	enabled = true
+	autoupdate = true
