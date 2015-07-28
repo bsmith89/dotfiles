@@ -345,6 +345,11 @@ set title                     " show title in console title bar
 " TODO: Build a generalizable way to call filters in ~/.vim/filters
 vnoremap <Leader>gq :! ~/.vim/filters/proform<Enter>
 
+if has('nvim')
+    let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+    " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
 " -----------------------------------------------------------------------------
 "  Mouse {{{2
 " -----------------------------------------------------------------------------
