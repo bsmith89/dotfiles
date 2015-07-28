@@ -190,6 +190,8 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'ivanov/vim-ipython'
 
+Plug 'jpalardy/vim-slime'
+
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
 " -----------------------------------------------------------------------------
@@ -605,6 +607,11 @@ nnoremap <Leader>u :UndotreeToggle<CR>
 
 " Re: Plug:'godlygeek/tabular'
 nnoremap <Leader>\ :Tabularize /\| <CR>
+
+" Re: Plug: 'jpalardy/vim-slime'
+let g:slime_target = "tmux"
+let g:slime_paste_file = tempname()
+let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 
 
 " ---------------------------END Configuration---------------------------------
