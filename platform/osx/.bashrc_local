@@ -54,3 +54,9 @@ seq-div() {
     activate_venv
     [ "$TMUX" ] || tmux attach || tmux
 }
+
+# Add bashdefault completion for some programs that don't have it for an
+# unknown reason.
+for prog in 'vim' 'ls'; do
+    `complete -p $prog | awk '{NF--; print $0}'` -o bashdefault $prog
+done
