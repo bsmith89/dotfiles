@@ -1,19 +1,16 @@
-BACKUP_DIR=${PWD}/backups
-SRC_DIR=${PWD}/home
-HOME_DIR=${HOME}
-SRC_FILES=$(wildcard ${SRC_DIR}/*)
-SRC_FILES+=$(wildcard ${SRC_DIR}/.*)
+BACKUP_DIR := ${PWD}/backups
+SRC_DIR := ${PWD}/home
+HOME_DIR := ${HOME}
+
+ALL_FILES :=
+SRC_FILES := $(filter-out ${SRC_DIR}/. ${SRC_DIR}/.., $(wildcard ${SRC_DIR}/* ${SRC_DIR}/.*))
+ALL_FILES += ${SRC_FILES}
 
 ifdef PLATFORM
-$(info PLATFORM=${PLATFORM})
-PLATFORM_DIR=${PWD}/platform/${PLATFORM}
-PLATFORM_FILES=$(wildcard ${PLATFORM_DIR}/*)
-PLATFORM_FILES+=$(wildcard ${PLATFORM_DIR}/.*)
+PLT_DIR := ${PWD}/platform/${PLATFORM}
+PLT_FILES := $(filter-out ${PLT_DIR}/. ${PLT_DIR}/.., $(wildcard ${PLT_DIR}/* ${PLT_DIR}/.*))
+ALL_FILES += ${PLT_FILES}
 endif
-
-ALL_FILES=$(filter-out ${SRC_DIR}/. ${SRC_DIR}/.. \
-		               ${PLATFORM_DIR}/. ${PLATFORM_DIR}/.., \
-		    ${SRC_FILES} ${PLATFORM_FILES})
 
 install: _install tic
 
