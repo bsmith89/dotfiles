@@ -63,11 +63,11 @@ alias vbox-sshx="ssh -X -p 3022 ${vbox}"
 alias td="todo.sh"
 alias todo="todo.sh"
 
-# alias activate_venv="source venv/bin/activate"
+DEFAULT_VENV=venv
 activate_venv() {
     local START_DIR=$PWD
     local VENV="$1"
-    [ -z "$VENV" ] && VENV=venv
+    [ -z "$VENV" ] && VENV="$DEFAULT_VENV"
     while [ ! -d "$VENV" ]; do
         cd ..
         if [ "$PWD" == "/" ]; then
@@ -87,9 +87,9 @@ cd_venv() {
     cd "$@"
     activate_venv 2>/dev/null
     if [ "$?" = 0 ]; then
-        echo "ACTIVATED $VIRTUAL_ENV" >&2
+        echo "$VIRTUAL_ENV ACTIVATED" >&2
     elif [ -n "$VIRTUAL_ENV" ]; then
-        echo "DEACTIVATED $VIRTUAL_ENV" >&2
+        echo "$VIRTUAL_ENV DEACTIVATED" >&2
         deactivate
     fi
 }
