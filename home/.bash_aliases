@@ -71,12 +71,27 @@ activate_venv() {
     while [ ! -d "$VENV" ]; do
         cd ..
         if [ "$PWD" == "/" ]; then
+            echo "ERROR: no venv \"$VENV\" found." >&2
             cd "$START_DIR"
             return 1
         fi
     done
     source "${VENV}/bin/activate"
     local OUTCODE="$?"
+    [ "$OUTCODE" = "0" ] || echo "ERROR: $PWD/$VENV exists but cannot be activated." >&2
     cd $START_DIR
     return "$OUTCODE"
 }
+
+cd_venv() {
+    cd "$@"
+    activate_venv 2>/dev/null
+    if [ "$?" = 0 ]; then
+        echo "ACTIVATED $VIRTUAL_ENV" >&2
+    elif [ -n "$VIRTUAL_ENV" ]; then
+        echo "DEACTIVATED $VIRTUAL_ENV" >&2
+        deactivate
+    fi
+}
+
+alias cd="cd_venv"
