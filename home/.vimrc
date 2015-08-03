@@ -576,6 +576,11 @@ let g:ycm_collect_identifiers_from_tags_files       = 1
 let g:ycm_seed_identifiers_with_syntax              = 1
 let g:ycm_filepath_completion_use_working_dir       = 1
 
+" Re: Plug:eagletmt/neco-ghc
+let g:ycm_semantic_triggers = {
+    \ 'haskell': ['.']
+    \ }
+
 " Fix the UltiSnips/YCM key-binding conflict
 " Based on http://stackoverflow.com/a/22253548/1951857
 " make YCM compatible with UltiSnips (using supertab)
