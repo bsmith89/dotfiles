@@ -414,7 +414,7 @@ inoremap <C-e> <Esc>A
 " TODO: In visual modes, surround with 's' and replace with 'S'
 
 " Delete whole words on <M-BS>
-imap <M-BS> <Esc>dbi
+imap <M-BS> <Esc>ldbi
 
 " Carry out the macro stored in the @q
 nnoremap <Leader>q @q
