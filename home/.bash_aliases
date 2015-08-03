@@ -63,7 +63,8 @@ alias vbox-sshx="ssh -X -p 3022 ${vbox}"
 alias td="todo.sh"
 alias todo="todo.sh"
 
-DEFAULT_VENV=venv
+DEFAULT_VENV=./.venv
+
 activate_venv() {
     local START_DIR=$PWD
     local VENV="$1"
@@ -83,11 +84,24 @@ activate_venv() {
     return "$OUTCODE"
 }
 
+make_venv() {
+    local VENV="$1"
+    shift
+    [ -z "$VENV" ] && VENV="$DEFAULT_VENV"
+    python3 -m venv $@ $VENV
+    activate_venv $VENV
+}
+
 cd_venv() {
     cd "$@"
+    START_ENV=$VIRTUAL_ENV
     activate_venv 2>/dev/null
     if [ "$?" = 0 ]; then
-        echo "$VIRTUAL_ENV ACTIVATED" >&2
+        if [ "$START_ENV" != "$VIRTUAL_ENV" ]; then
+            echo "$VIRTUAL_ENV ACTIVATED" >&2
+        else
+            return 0
+        fi
     elif [ -n "$VIRTUAL_ENV" ]; then
         echo "$VIRTUAL_ENV DEACTIVATED" >&2
         deactivate
