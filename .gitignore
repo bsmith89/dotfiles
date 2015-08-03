@@ -1,7 +1,7 @@
 build/
 backups/
 home/.vim/bundle/*
-home/.vim/autoload/plug.vim
+home/.vim/autoload/plug.vim*
 home/.vim/mthesaur.txt
 home/.vim/spell/*.spl
 home/.vim/spell/*.sug
