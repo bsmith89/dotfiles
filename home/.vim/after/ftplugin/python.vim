@@ -22,3 +22,5 @@ let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python']
 "let g:syntastic_aggregate_errors = 1
 
 let b:delimitMate_nesting_quotes = ['"', "'"]
+
+setlocal indentkeys-=:
