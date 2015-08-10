@@ -60,8 +60,15 @@ vbox="${USER}@127.0.0.1"
 alias vbox-ssh="ssh -p 3022 ${vbox}"
 alias vbox-sshx="ssh -X -p 3022 ${vbox}"
 
-alias td="todo.sh"
 alias todo="todo.sh"
+complete -F _todo todo
+
+alias td="todo.sh"
+complete -F _todo td
+
+alias tdadd="td add"
+alias tdedit="td edit"
+alias tdnext="todo.sh lsfile next.txt"
 
 DEFAULT_VENV=./.venv
 
