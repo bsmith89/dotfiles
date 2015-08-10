@@ -215,9 +215,9 @@ Plug 'chrisbra/csv.vim'
 
 " Plug 'freitass/todo.txt-vim'
 " --OR--
-" Plug 'davidoc/todo.txt-vim'
+Plug 'davidoc/todo.txt-vim'
 " --OR--
-Plug '~/.vim/bundle/todo.txt-vim'
+" Plug '~/.vim/bundle/todo.txt-vim'
 
 
 " -----------------------------------------------------------------------------
