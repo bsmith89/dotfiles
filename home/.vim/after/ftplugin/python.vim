@@ -23,4 +23,8 @@ let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python']
 
 let b:delimitMate_nesting_quotes = ['"', "'"]
 
+" Don't reindent on ':' (which can show up in comments or dicts)
 setlocal indentkeys-=:
+
+" Use %cpaste for IPython
+let b:slime_python_ipython = 1
