@@ -212,7 +212,14 @@ Plug 'lervag/vimtex'
 "Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 
 Plug 'chrisbra/csv.vim'
-"
+
+" Plug 'freitass/todo.txt-vim'
+" --OR--
+" Plug 'davidoc/todo.txt-vim'
+" --OR--
+Plug '~/.vim/bundle/todo.txt-vim'
+
+
 " -----------------------------------------------------------------------------
 call plug#end()
 " --------------------------------END Plugins--------------------------------- }-
