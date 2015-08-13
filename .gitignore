@@ -6,3 +6,4 @@ home/.vim/mthesaur.txt
 home/.vim/spell/*.spl
 home/.vim/spell/*.sug
 tags
+*.swp
