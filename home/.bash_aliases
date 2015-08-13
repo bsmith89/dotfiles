@@ -68,7 +68,7 @@ complete -F _todo td
 
 alias tdadd="td add"
 alias tdedit="td edit"
-alias tdnext="todo.sh lsfile next.txt"
+alias tdnext="td next"
 
 DEFAULT_VENV=./.venv
 
