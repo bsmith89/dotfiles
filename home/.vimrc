@@ -442,9 +442,11 @@ nnoremap <Leader>q @q
 
 nnoremap <Leader>p :set paste!<CR>
 
-" " This doesn't work, but I want it to:
-" " Insert a non-breaking space on Shift-Space
-" nmap <S-Space> <C-k><Space><Space>
+" Break the current line at the cursor
+nnoremap K i<Enter><Esc>k$
+nnoremap gK i<Enter><Esc>Vk=$
+
+
 
 " -----------------------------------------------------------------------------
 "  Tabstops and Indentation {{{2
