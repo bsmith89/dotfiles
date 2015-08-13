@@ -1,17 +1,25 @@
 #!/bin/bash
 # https://raw.githubusercontent.com/mbrubeck/todo.txt-cli/master/todo.actions.d/edit
-case $1 in
-"usage")
-  echo "$(basename $0) [BASENAME]"
-  echo "  Open \$TODO_DIR/BASENAME.txt in \$EDITOR."
-  echo "  If BASENAME is not given, defaults to 'todo'."
-  ;;
-*)
-  FILE=${2:-todo}.txt
-  if [ -n "$EDITOR" ]; then
-    $EDITOR $TODO_DIR/$FILE
-  else
-    echo "Error: The EDITOR environment variable is not set"
-  fi
-  ;;
-esac
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) [FILE]"
+    echo "      Open \$TODO_DIR/\$FILE in \$EDITOR."
+    echo "      If \$FILE is not given, defaults to \$TODO_FILE."
+    echo ""
+    exit
+}
+
+if [ -z "$1" ]; then
+    FILE=$TODO_FILE
+else
+    FILE=$TODO_DIR/${1%.txt}.txt
+fi
+
+if [ -n "$EDITOR" ]; then
+    $EDITOR $FILE
+else
+    echo "Error: The \$EDITOR environment variable is not set"
+    exit 1
+fi

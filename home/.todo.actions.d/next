@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+number_pat="^[0-9]+$"
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) [NUMBER]"
+    echo "      move lines from \$LATER_FILE to \$TODO_FILE."
+    echo "      If no NUMBER provided, displays entire \$LATER_FILE."
+    echo ""
+    exit
+}
+
+if [ -z "$LATER_FILE" ]; then
+    echo "\$LATER_FILE not set."
+    exit 1
+fi
+
+if ! [[ $1 =~ $number_pat ]]; then
+    TODOTXT_DI
+    TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k1,1n'
+    $TODO_FULL_SH listfile $(basename "$LATER_FILE") "$*"
+else
+    line=$1
+    $TODO_FULL_SH -f mv $line $(basename "$TODO_FILE") $(basename "$LATER_FILE")
+fi

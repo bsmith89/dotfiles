@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) NUMBER, [NUMBER, [...]]"
+    echo "      deprioritizes and move lines from \$TODO_FILE to \$LATER_FILE"
+    echo ""
+    exit
+}
+
+if [ -z "$LATER_FILE" ]; then
+    echo "\$LATER_FILE not set."
+    exit 1
+fi
+
+for line in $*; do
+    $TODO_FULL_SH depri $line
+    $TODO_FULL_SH -f mv $line $(basename $LATER_FILE)
+done
+
