@@ -19,7 +19,6 @@ if [ -z "$LATER_FILE" ]; then
 fi
 
 if ! [[ $1 =~ $number_pat ]]; then
-    TODOTXT_DI
     TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k1,1n'
     $TODO_FULL_SH listfile $(basename "$LATER_FILE") "$*"
 else
