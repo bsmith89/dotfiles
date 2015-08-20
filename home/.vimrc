@@ -421,6 +421,9 @@ set showmatch               " Briefly jump to a paren once it's balanced
 " Delete whole words on <M-BS>
 imap <M-BS> <Esc>ldbi
 
+" Remove trailing whitespace
+vnoremap <Leader>S :s:\s\+$::<CR>
+
 " Carry out the macro stored in the @q
 nnoremap <Leader>q @q
 
