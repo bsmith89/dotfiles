@@ -36,6 +36,7 @@ call plug#begin('~/.vim/bundle')
 "  Moving Around, Searching, and Patterns {{{2
 " -----------------------------------------------------------------------------
 "Plug 'edsono/vim-matchit'
+Plug 'tpope/vim-rsi'
 
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
@@ -415,9 +416,6 @@ set formatoptions+=r
 
 set showmatch               " Briefly jump to a paren once it's balanced
 
-inoremap <C-a> <Esc>I
-inoremap <C-e> <Esc>A
-
 " TODO: In visual modes, surround with 's' and replace with 'S'
 
 " Delete whole words on <M-BS>
@@ -526,9 +524,6 @@ cnoremap W! w !sudo tee % >/dev/null
 " -----------------------------------------------------------------------------
 set wildmenu                  " menu completion in command mode on <Tab>
 set wildmode=longest,list            " <Tab> cycles between all matching choices.
-
-" BASH style movements on command line
-cnoremap <C-a> <C-B>
 
 " -----------------------------------------------------------------------------
 "  Executing External Commands {{{2
