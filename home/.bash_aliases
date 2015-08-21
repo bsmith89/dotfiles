@@ -70,25 +70,33 @@ alias tdadd="td add"
 alias tdedit="td edit"
 alias tdnext="td next"
 
-DEFAULT_VENV=./.venv
+# Find backwards *up* the directory tree (towards root)
+find_up() {
+    in=$(pwd)
+    find "$in" -maxdepth 1 -name "$@"
+    while [ "$in" != "/" ]; do
+        in=$(dirname "$in")
+        find "$in" -maxdepth 1 -name "$@"
+    done
+}
+
+export DEFAULT_VENV=.venv
 
 activate_venv() {
-    local START_DIR=$PWD
-    local VENV="$1"
-    [ -z "$VENV" ] && VENV="$DEFAULT_VENV"
-    while [ ! -d "$VENV" ]; do
-        cd ..
-        if [ "$PWD" == "/" ]; then
-            echo "ERROR: no venv \"$VENV\" found." >&2
-            cd "$START_DIR"
+    local venv="$1"
+    [ -z "$venv" ] && venv="$DEFAULT_VENV"
+    local dir=$(find_up $venv | head -n 1)
+    if [ -n "$dir" ]; then
+        if source "$dir/bin/activate"; then
+            return 0
+        else
+            echo >&2 "ERROR: $dir exists but cannot be activated."
             return 1
         fi
-    done
-    source "${VENV}/bin/activate"
-    local OUTCODE="$?"
-    [ "$OUTCODE" = "0" ] || echo "ERROR: $PWD/$VENV exists but cannot be activated." >&2
-    cd $START_DIR
-    return "$OUTCODE"
+    else
+        echo >&2 "ERROR: no directory $venv found"
+        return 1
+    fi
 }
 
 make_venv() {
