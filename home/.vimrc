@@ -75,6 +75,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 "  Messages and Info {{{2
 " -----------------------------------------------------------------------------
 Plug 'bling/vim-airline'
+Plug 'mhinz/vim-startify'
 
 " -----------------------------------------------------------------------------
 "  Selecting Text {{{2
