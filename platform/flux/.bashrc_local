@@ -1,3 +1,26 @@
-alias scratch="cd /scratch/schmidt_fluxm"
+export SCRATCH=/scratch/schmidti_fluxm/bjsm
+
+alias scratch="cd $SCRATCH"
 alias showqu="showq -u $USER"
 alias topu="top -u $USER"
+alias qstatr="qstat -u $USER -f | grep --color=never '\(Job Id\|Job_Name\|resources_\|Resource_\)'"
+
+alias vim="nvim"
+export EDITOR="nvim"
+
+# $HOME/.local dir
+export PATH="$HOME/.local/bin:$HOME/.local/sbin:$PATH"
+export MANPATH="$HOME/.local/share/man:$MANPATH"
+export INFOPATH="$HOME/.local/share/info:$INFOPATH"
+
+# linuxbrew
+export PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
+export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+fi
+#
+# # added by Miniconda3 3.16.0 installer
+# export PATH="/home/bjsm/miniconda3/bin:$PATH"
