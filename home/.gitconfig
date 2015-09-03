@@ -27,3 +27,5 @@
 [rerere]
 	enabled = true
 	autoupdate = true
+[alias]
+	l = log --oneline -n 10
