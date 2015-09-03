@@ -24,3 +24,5 @@ fi
 #
 # # added by Miniconda3 3.16.0 installer
 # export PATH="/home/bjsm/miniconda3/bin:$PATH"
+
+alias cd=cd_venv

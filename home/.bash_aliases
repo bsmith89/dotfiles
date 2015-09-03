@@ -121,5 +121,3 @@ cd_venv() {
         deactivate
     fi
 }
-
-alias cd="cd_venv"

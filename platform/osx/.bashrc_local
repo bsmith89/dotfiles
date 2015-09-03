@@ -58,3 +58,5 @@ seq-div() {
 }
 
 alias qn="quicknote"
+
+alias cd=cd_venv
