@@ -29,6 +29,7 @@ alias flux-ssh2="ssh $flux2"
 alias flux-sshx="ssh -X $flux"
 alias flux-sshx1="ssh -X $flux1"
 alias flux-sshx2="ssh -X $flux2"
+fluxf="bjsm@flux-xfer.arc-ts.umich.edu"
 
 # Safe copy and mv
 alias cp="cp -i"
