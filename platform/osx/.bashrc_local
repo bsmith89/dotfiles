@@ -12,6 +12,8 @@ export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 export EDITOR=nvim
 alias vim='nvim'
 
+alias top="top -o cpu"
+
 # Include Haskell bins
 export PATH=$HOME/.cabal/bin:$PATH
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
