@@ -56,3 +56,5 @@ seq-div() {
     activate_venv
     [ "$TMUX" ] || tmux attach || tmux
 }
+
+alias qn="quicknote"
