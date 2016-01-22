@@ -5,5 +5,8 @@ home/.vim/autoload/plug.vim*
 home/.vim/mthesaur.txt
 home/.vim/spell/*.spl
 home/.vim/spell/*.sug
+home/.config/*
 tags
 *.swp
+
+!home/.config/nvim/*
