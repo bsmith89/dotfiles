@@ -60,3 +60,8 @@ seq-div() {
 alias qn="quicknote"
 
 alias cd=cd_venv
+
+# Append /usr/local/bin to the front of the PATH for homebrew
+# as well as /usr/local/opt/coreutils/libexec/gnubin
+# for the homebrew installation of core GNU utils.
+export PATH=/Library/TeX/texbin:$PATH
