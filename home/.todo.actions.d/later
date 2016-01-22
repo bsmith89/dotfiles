@@ -19,4 +19,3 @@ for line in $*; do
     $TODO_FULL_SH depri $line
     $TODO_FULL_SH -f mv $line $(basename $LATER_FILE)
 done
-

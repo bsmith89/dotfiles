@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) NUMBER ESTIMATE"
+    echo "      add or edit the et: tag."
+    echo ""
+    exit
+}
+
+item=$1
+shift
+et=$1
+
+line=$(sed "$item!d" "$TODO_FILE")
+
+et_line=$(sed "s/\( et:[0-9]*\|$\)/ et:$et/" <<<$line)
+
+$TODO_FULL_SH depri $item
+$TODO_FULL_SH replace $item "$et_line"
