@@ -345,6 +345,19 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set splitbelow
 set splitright
 
+inoremap <C-h> <Esc>:TmuxNavigateLeft<CR>
+inoremap <C-j> <Esc>:TmuxNavigateDown<CR>
+inoremap <C-k> <Esc>:TmuxNavigateUp<CR>
+inoremap <C-l> <Esc>:TmuxNavigateRight<CR>
+
+if exists(':tmap')
+    tnoremap <C-h> <C-\><C-N>:TmuxNavigateLeft<CR>
+    tnoremap <C-j> <C-\><C-N>:TmuxNavigateDown<CR>
+    tnoremap <C-k> <C-\><C-N>:TmuxNavigateUp<CR>
+    tnoremap <C-l> <C-\><C-N>:TmuxNavigateRight<CR>
+endif
+
+
 " -----------------------------------------------------------------------------
 "  Terminal {{{2
 " -----------------------------------------------------------------------------
