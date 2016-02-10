@@ -1,12 +1,19 @@
 BACKUP_DIR := backups
 SRC_DIR := home
+PLT_DIR := platform
 HOME_DIR := ${HOME}
+
+ifndef PLATFORM
+	PLATFORM_LIST := $(shell ls ${PLT_DIR}/)
+	PLATFORM_PROMPT := What platform would you like to install to (empty for none)? [${PLATFORM_LIST}]
+	PLATFORM := $(shell read -p "${PLATFORM_PROMPT} " RESPONSE; echo $$RESPONSE)
+endif
 
 install: _install tic
 
 _install: home/.vim/mthesaur.txt software-check
 	stow --verbose=2 -t ${HOME_DIR} home
-ifdef PLATFORM
+ifneq ($(strip ${PLATFORM}),)
 	stow --verbose=2 -d platform -t ${HOME_DIR} ${PLATFORM}
 endif
 	vim +PlugInstall +qall
