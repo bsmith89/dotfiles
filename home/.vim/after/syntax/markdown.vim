@@ -1,4 +1,4 @@
-syn sync minlines=100
+syn sync minlines=500
 
 " I don't use indentation based markdown code blocks since I have fenced
 " blocks

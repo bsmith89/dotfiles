@@ -1,1 +1,1 @@
-syn sync minlines=100
+syn sync minlines=500
