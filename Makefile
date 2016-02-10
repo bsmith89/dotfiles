@@ -21,9 +21,9 @@ endif
 
 tic: terminfo/*
 	@for file in $^ ; do \
-		echo "tic $$file" ; \
-		tic $$file ; \
-	done
+        echo "tic $$file" ; \
+        tic $$file ; \
+    done
 
 software-check:
 	@for command in ${REQUIRED} ; do \
