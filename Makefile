@@ -11,8 +11,8 @@ tic: terminfo/*
 	done
 
 _install: home/.vim/mthesaur.txt software-check
-	stow -t ${HOME_DIR} home
-	[ -z "${PLATFORM}" ] || stow -d platform -t ${HOME_DIR} ${PLATFORM}
+	stow --verbose=2 -t ${HOME_DIR} home
+	[ -z "${PLATFORM}" ] || stow --verbose=2 -d platform -t ${HOME_DIR} ${PLATFORM}
 	vim +PlugInstall +qall
 
 # If I'm not mistaken, this should make any required directories.
@@ -34,7 +34,7 @@ build/mthes10.zip: | build/
 .PHONY: tic install _install software-check
 
 software-check:
-	vim --version
-	stow --version
-	curl --version
+	vim --version 2>&1 >/dev/null
+	stow --version 2>&1 >/dev/null
+	curl --version 2>&1 >/dev/null
 
