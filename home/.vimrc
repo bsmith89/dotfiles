@@ -168,7 +168,7 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/syntastic'
 
-Plug 'valloric/YouCompleteMe', {'do': './install.sh --clang-completer'}
+Plug 'valloric/YouCompleteMe', {'do': './install.py'}
 "
 Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
 Plug 'SirVer/ultisnips'
