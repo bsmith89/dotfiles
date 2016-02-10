@@ -28,8 +28,8 @@ tic: terminfo/*
 software-check:
 	@for command in ${REQUIRED} ; do \
         which $$command 2>&1 >/dev/null \
-        && echo "$$command: OK " \
-        || echo "$$command: FAILED"; \
+        && echo "$$command: OK" \
+        || echo "$$command: NOT INSTALLED" ; \
     done
 
 .PHONY: tic install _install software-check
