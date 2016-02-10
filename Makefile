@@ -2,6 +2,7 @@ BACKUP_DIR := backups
 SRC_DIR := home
 PLT_DIR := platform
 HOME_DIR := ${HOME}
+REQUIRED := vim curl stow
 
 ifndef PLATFORM
 	PLATFORM_LIST := $(shell ls ${PLT_DIR}/)
@@ -25,9 +26,11 @@ tic: terminfo/*
 	done
 
 software-check:
-	vim --version 2>&1 >/dev/null
-	stow --version 2>&1 >/dev/null
-	curl --version 2>&1 >/dev/null
+	@for command in ${REQUIRED} ; do \
+        which $$command 2>&1 >/dev/null \
+        && echo "$$command: OK " \
+        || echo "$$command: FAILED"; \
+    done
 
 .PHONY: tic install _install software-check
 
