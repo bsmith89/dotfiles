@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) ITEM# [PRIORITY]"
+    echo "      change the priority of task NUMBER to"
+    echo "      PRIORITY.  If no PRIORITY given, change"
+    echo "      to (A)"
+    echo ""
+    exit
+}
+
+item=$1
+shift
+
+$TODO_FULL_SH p $item ${1-A}
