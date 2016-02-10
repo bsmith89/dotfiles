@@ -2,7 +2,7 @@ BACKUP_DIR := backups
 SRC_DIR := home
 PLT_DIR := platform
 HOME_DIR := ${HOME}
-REQUIRED := vim curl stow
+REQUIRED := vim curl stow gzip
 
 ifndef PLATFORM
 	PLATFORM_LIST := $(shell ls ${PLT_DIR}/)
@@ -41,9 +41,9 @@ build/:
 home/.vim/mthesaur.txt: build/mthesaur.txt
 	cp $^ $@
 
-build/mthesaur.txt: | build/mthes10.zip
-	unzip -o -d $(@D) $| $(@F)
+build/mthesaur.txt: software-check | build/mthes10.zip
+	gzip --decompress --stdout $| > $@
 	touch $@
 
-build/mthes10.zip: | build/
+build/mthes10.zip: software-check | build/
 	curl -o $@ http://www.gutenberg.org/dirs/etext02/mthes10.zip
