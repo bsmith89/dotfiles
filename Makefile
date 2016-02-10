@@ -31,5 +31,10 @@ build/mthesaur.txt: | build/mthes10.zip
 build/mthes10.zip: | build/
 	curl -o $@ http://www.gutenberg.org/dirs/etext02/mthes10.zip
 
-.PHONY: tic install _install
+.PHONY: tic install _install software-check
+
+software-check:
+	vim --version
+	stow --version
+	curl --version
 
