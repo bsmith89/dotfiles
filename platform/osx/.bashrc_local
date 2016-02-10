@@ -51,12 +51,6 @@ export PHRED_PARAMETER_FILE=$HOME/.local/etc/phredpar.dat
 PERL_MB_OPT="--install_base \"/Users/bjsmith/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/bjsmith/perl5"; export PERL_MM_OPT;
 
-seq-div() {
-    cd $HOME/Projects/seq-div
-    activate_venv
-    [ "$TMUX" ] || tmux attach || tmux
-}
-
 alias qn="quicknote"
 
 alias cd=cd_venv
