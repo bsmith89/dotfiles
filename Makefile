@@ -16,6 +16,7 @@ endif
 
 install: _install tic
 
+# TODO: Confirm bootstrap desired
 _install: software-check
 ifneq ($(strip ${PLATFORM}),)
 	[ ! -x ${BOOTSTRAP_DIR}/${PLATFORM} ] || \
