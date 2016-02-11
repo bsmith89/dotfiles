@@ -17,13 +17,13 @@ endif
 install: _install tic
 
 _install: software-check
-	stow --verbose=2 -t ${HOME_DIR} home
 ifneq ($(strip ${PLATFORM}),)
-	[ ! -d ${PLATFORM_DIR}/${PLATFORM} ] || \
-        stow --verbose=2 -d ${PLATFORM_DIR} -t ${HOME_DIR} ${PLATFORM}
 	[ ! -x ${BOOTSTRAP_DIR}/${PLATFORM} ] || \
         ${BOOTSTRAP_DIR}/${PLATFORM}
+	[ ! -d ${PLATFORM_DIR}/${PLATFORM} ] || \
+        stow --verbose=2 -d ${PLATFORM_DIR} -t ${HOME_DIR} ${PLATFORM}
 endif
+	stow --verbose=2 -t ${HOME_DIR} home
 	vim +PlugInstall +qall
 
 tic: terminfo/*
