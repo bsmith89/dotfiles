@@ -8,7 +8,7 @@ REQUIRED := vim curl stow gzip
 
 
 ifndef PLATFORM
-	PLATFORM_LIST := $(shell ls ${PLATFORM_DIR}/ ${BOOTSTRAP_DIR}/ | sort | uniq )
+	PLATFORM_LIST := $(shell find ${PLATFORM_DIR} ${BOOTSTRAP_DIR} -maxdepth 1 -mindepth 1 | cut -f2 -d'/' | sort | uniq )
 	PLATFORM_MSG := What platform would you like to install to (leave empty for none)?
 	PLATFORM_PROMPT :=  ${PLATFORM_MSG} [${PLATFORM_LIST}]
 	PLATFORM := $(shell read -p "${PLATFORM_PROMPT} " RESPONSE; echo $$RESPONSE)
