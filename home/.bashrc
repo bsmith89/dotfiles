@@ -167,9 +167,3 @@ if [ -d "$LOCAL_BASH_COMPL" ]; then
         source "$script"
     done
 fi
-
-# Add bashdefault completion for some programs that don't have it for an
-# unknown reason.
-for prog in 'vim' 'ls' 'make' 'rm'; do
-    `complete -p $prog | awk '{NF--; print $0}'` -o bashdefault $prog
-done
