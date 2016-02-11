@@ -1,12 +1,16 @@
 BACKUP_DIR := backups
 SRC_DIR := home
-PLT_DIR := platform
+PLATFORM_DIR := platform
+BOOTSTRAP_DIR := bootstrap
 HOME_DIR := ${HOME}
 REQUIRED := vim curl stow gzip
 
+
+
 ifndef PLATFORM
-	PLATFORM_LIST := $(shell ls ${PLT_DIR}/)
-	PLATFORM_PROMPT := What platform would you like to install to (empty for none)? [${PLATFORM_LIST}]
+	PLATFORM_LIST := $(shell ls ${PLATFORM_DIR}/ ${BOOTSTRAP_DIR}/ | sort | uniq )
+	PLATFORM_MSG := What platform would you like to install to (leave empty for none)?
+	PLATFORM_PROMPT :=  ${PLATFORM_MSG} [${PLATFORM_LIST}]
 	PLATFORM := $(shell read -p "${PLATFORM_PROMPT} " RESPONSE; echo $$RESPONSE)
 endif
 
@@ -15,7 +19,10 @@ install: _install tic
 _install: software-check
 	stow --verbose=2 -t ${HOME_DIR} home
 ifneq ($(strip ${PLATFORM}),)
-	stow --verbose=2 -d platform -t ${HOME_DIR} ${PLATFORM}
+	[ ! -d ${PLATFORM_DIR}/${PLATFORM} ] || \
+        stow --verbose=2 -d ${PLATFORM_DIR} -t ${HOME_DIR} ${PLATFORM}
+	[ ! -x ${BOOTSTRAP_DIR}/${PLATFORM} ] || \
+        ${BOOTSTRAP_DIR}/${PLATFORM}
 endif
 	vim +PlugInstall +qall
 
