@@ -4,6 +4,7 @@ setlocal tabstop=8
 setlocal softtabstop=4
 "setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
+BracelessEnable_python +indent +highlight-cc
 
 " Re: Plug:scrooloose/syntastic
 function! TogglePython3()

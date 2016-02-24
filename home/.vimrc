@@ -190,10 +190,11 @@ Plug 'tomtom/tcomment_vim'
 " ---OR---
 "Plug 'tpope/vim-commentary'
 
-
 " Plug 'ivanov/vim-ipython'
 "
 " Plug 'jpalardy/vim-slime'
+
+Plug 'tweekmonster/braceless.vim'
 
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
