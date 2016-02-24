@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) NUMBER DATE"
+    echo "      add or edit the due: tag."
+    echo ""
+    exit
+}
+
+item=$1
+shift
+date=`date +"%Y-%m-%d" --date="$1"`
+
+line=$(sed "$item!d" "$TODO_FILE")
+due_line=$(sed "s/\( due:[-0-9]*\|$\)/ due:$date/" <<<$line)
+
+$TODO_FULL_SH depri $item
+$TODO_FULL_SH replace $item "$due_line"
