@@ -190,9 +190,10 @@ Plug 'tomtom/tcomment_vim'
 " ---OR---
 "Plug 'tpope/vim-commentary'
 
-Plug 'ivanov/vim-ipython'
 
-Plug 'jpalardy/vim-slime'
+" Plug 'ivanov/vim-ipython'
+"
+" Plug 'jpalardy/vim-slime'
 
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
