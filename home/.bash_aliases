@@ -17,17 +17,10 @@ alias mv="mv -i"
 alias psu="ps -u $USER"
 alias ..="cd .."
 alias nmsq="grep -c '^>'"
-alias now="date +%r%n%a%t%D"
 alias view="vim -R"
-alias cl="column -s '	' -t"
-alias clt=cl
-alias cl,="column -s ',' -t"
 
 table() {
-    cl $1 | less -S
-}
-tablet() {
-    clt $1 | less -S
+    column -s'	' -t $1 | less -S
 }
 alias less="less -S"
 
@@ -37,10 +30,6 @@ complete -F _todo todo
 
 alias td="todo.sh"
 complete -F _todo td
-
-alias tdadd="td add"
-alias tdedit="td edit"
-alias tdnext="td next"
 
 # Find backwards *up* the directory tree (towards root)
 find_up() {
