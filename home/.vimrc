@@ -559,7 +559,6 @@ nnoremap <Leader>m :w<CR>:Neomake!<CR>
 " -----------------------------------------------------------------------------
 "  Special Characters {{{2
 " -----------------------------------------------------------------------------
-set encoding=utf-8
 
 " -----------------------------------------------------------------------------
 "  Miscellaneous {{{2
@@ -655,3 +654,8 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 if !empty(glob("~/.vimrc_local"))
    source $home/.vimrc_local
 endif
+
+" Run these things only once
+if exists("b:did_vimrc") | finish | endif
+let b:did_vimrc = 1
+set encoding=utf-8
