@@ -579,6 +579,7 @@ nnoremap <Leader>b :split `="$HOME/.vim/after/ftplugin/" . &ft . ".vim"`<CR>
 " Re: Plug:airblade/vim-gitgutter
 " vim-gitgutter will use Sign Column to set its color, reload it.
 call gitgutter#highlight#define_highlights()
+let g:gitgutter_max_signs=10000
 
 " Re: Plug:bling/vim-airline
 " enable/disable automatic population of the `g:airline_symbols` dictionary
