@@ -29,9 +29,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
+" }}}
 call plug#begin('~/.vim/bundle')
-
-
 " -----------------------------------------------------------------------------
 "  Moving Around, Searching, and Patterns {{{2
 " -----------------------------------------------------------------------------
