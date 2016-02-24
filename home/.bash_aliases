@@ -1,6 +1,5 @@
 # Various aliases.  Sourced as the second-to-last thing from .bashrc
 
-
 alias ls='ls -Ap --color=auto'
 alias ll='ls -alFh'
 alias grep='grep --color=auto'
@@ -41,6 +40,7 @@ find_up() {
     done
 }
 
+# Working with venv's
 export DEFAULT_VENV=.venv
 
 activate_venv() {
