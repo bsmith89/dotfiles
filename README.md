@@ -2,6 +2,9 @@ My attempt at a dotfiles system.  Based loosely on
 https://github.com/sontek/dotfiles and various projects listed on
 http://dotfiles.github.io/
 
+Stow configuration inspired by
+<http://brandon.invergo.net/news/2012-05-26-using-gnu-stow-to-manage-your-dotfiles.html>
+
 Enjoy!
 
 ##Usage
