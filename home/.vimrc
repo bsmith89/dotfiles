@@ -281,6 +281,8 @@ augroup linenumbers
     autocmd WinLeave * :set norelativenumber
     autocmd CmdwinEnter * :set norelativenumber
     autocmd CmdwinLeave * :set relativenumber
+    autocmd BufEnter * :set norelativenumber
+    autocmd BufLeave * :set relativenumber
 augroup END
 set numberwidth=1             " using only 1 column (and 1 space) while possible
 
