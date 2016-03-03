@@ -26,3 +26,4 @@
 	autoupdate = true
 [alias]
 	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit -n 20
+    wdiff = diff --color-words
