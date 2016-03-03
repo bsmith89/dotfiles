@@ -290,7 +290,7 @@ set numberwidth=1             " using only 1 column (and 1 space) while possible
 set colorcolumn=79
 
 " displays tabs with :set list & displays when a line runs off-screen
-set listchars=tab:›―,eol:¶,trail:–,precedes:⋘,extends:⋙,nbsp:‿
+set listchars=tab:›―,eol:¬,trail:·,precedes:⋘,extends:⋙,nbsp:‿
 " This turns on the display defined above.
 set list
 
