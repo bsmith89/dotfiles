@@ -286,6 +286,9 @@ augroup linenumbers
 augroup END
 set numberwidth=1             " using only 1 column (and 1 space) while possible
 
+nnoremap : :set norelativenumber<CR>:
+nnoremap / :set norelativenumber<CR>/
+nnoremap ? :set norelativenumber<CR>?
 
 set colorcolumn=79
 
