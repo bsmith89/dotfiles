@@ -15,7 +15,7 @@ shift
 date=`date +"%Y-%m-%d" --date="$1"`
 
 line=$(sed "$item!d" "$TODO_FILE")
-due_line=$(sed "s/\( due:[-0-9]*\|$\)/ due:$date/" <<<$line)
+due_line=$(sed "s/\( due:\S*\|$\)/ due:$date/" <<<$line)
 
 $TODO_FULL_SH depri $item
 $TODO_FULL_SH replace $item "$due_line"
