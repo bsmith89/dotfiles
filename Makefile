@@ -2,7 +2,7 @@ BACKUP_DIR := backups
 SRC_DIR := home
 PLATFORM_DIR := platform
 HOME_DIR := ${HOME}
-REQUIRED := vim stow
+REQUIRED := stow
 
 
 ifndef PLATFORM
