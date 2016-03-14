@@ -16,8 +16,8 @@ install: _install tic
 
 # TODO: Confirm bootstrap desired
 _install: software-check
-	stow --verbose=2 -t ${HOME_DIR} home
 ifneq ($(strip ${PLATFORM}),)
+	stow --verbose=2 -t ${HOME_DIR} ${SRC_DIR}
 	[ ! -d ${PLATFORM_DIR}/${PLATFORM} ] || \
         stow --verbose=2 -d ${PLATFORM_DIR} -t ${HOME_DIR} ${PLATFORM}
 endif
