@@ -6,7 +6,7 @@ shift
 number_pat="^[0-9]+$"
 
 [ "$action" = "usage" ] && {
-    echo "    $(basename $0) [NUMBER]"
+    echo "    $(basename $0) [ITEM#]"
     echo "      move lines from \$LATER_FILE to \$TODO_FILE."
     echo "      If no NUMBER provided, displays entire \$LATER_FILE."
     echo ""

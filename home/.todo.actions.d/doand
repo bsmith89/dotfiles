@@ -4,7 +4,7 @@ action=$1
 shift
 
 [ "$action" = "usage" ] && {
-    echo "    $(basename $0) NUMBER ACTION ARGS"
+    echo "    $(basename $0) ITEM# ACTION ARGS"
     echo "      marks task NUMBER as complete after"
     echo "      doing ACTION NUMBER ARGS"
     exit

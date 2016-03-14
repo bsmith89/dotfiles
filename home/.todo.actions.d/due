@@ -4,7 +4,7 @@ action=$1
 shift
 
 [ "$action" = "usage" ] && {
-    echo "    $(basename $0) NUMBER DATE"
+    echo "    $(basename $0) ITEM# DATE"
     echo "      add or edit the due: tag."
     echo ""
     exit

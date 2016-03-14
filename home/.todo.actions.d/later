@@ -4,7 +4,7 @@ action=$1
 shift
 
 [ "$action" = "usage" ] && {
-    echo "    $(basename $0) NUMBER, [NUMBER, [...]]"
+    echo "    $(basename $0) ITEM#, [ITEM#, [...]]"
     echo "      deprioritizes and move lines from \$TODO_FILE to \$LATER_FILE"
     echo ""
     exit

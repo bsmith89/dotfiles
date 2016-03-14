@@ -4,7 +4,7 @@ action=$1
 shift
 
 [ "$action" = "usage" ] && {
-    echo "    $(basename $0) NUMBER ESTIMATE"
+    echo "    $(basename $0) ITEM# TIME"
     echo "      add or edit the et: tag."
     echo ""
     exit
