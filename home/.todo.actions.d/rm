@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) ITEM# [TERM]"
+    echo "      Deletes the task on line ITEM# in todo.txt."
+    echo "      If TERM specified, deletes only TERM from the task."
+    echo ""
+    exit
+}
+
+$TODO_FULL_SH -f del "$@"
