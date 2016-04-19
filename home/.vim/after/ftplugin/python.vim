@@ -17,6 +17,9 @@ function! TogglePython3()
 endfunction
 nmap <leader>3 :call TogglePython3()<CR>
 
+" Default to python 3
+let b:syntastic_python_python_exec='python3'
+
 " PyLint is waaaaaay too slow when I've got a bunch of imports
 let g:syntastic_python_checkers = ['pyflakes', 'pep8', 'python']
 "let g:syntastic_python_checkers = ['python']
