@@ -27,7 +27,8 @@ Restore original dotfiles in home directory
 	+ Figure out path completion for several filetypes.
 + Git
 	+ portable difflatex
-
++ Bash
+    + Don't source .bashrc and .bashrc\_local more than once.
 
 ## NOTES
 
