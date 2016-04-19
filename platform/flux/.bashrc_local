@@ -24,5 +24,3 @@ fi
 
 # added by Miniconda installer
 export PATH="/home/bjsm/miniconda/bin:$PATH"
-
-alias cd=cd_venv
