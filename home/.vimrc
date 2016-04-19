@@ -467,6 +467,9 @@ nnoremap <Leader>p :set paste!<CR>
 nnoremap K i<Enter><Esc>k$
 nnoremap gK i<Enter><Esc>Vk=$
 
+" Remove pre-line-terminus whitespace
+nnoremap <Leader>S :%s:\s\+$::<Enter>
+
 
 
 " -----------------------------------------------------------------------------
