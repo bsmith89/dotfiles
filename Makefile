@@ -1,4 +1,3 @@
-BACKUP_DIR := backups
 SRC_DIR := home
 PLATFORM_DIR := platform
 HOME_DIR := ${HOME}
@@ -16,8 +15,8 @@ install: _install tic
 
 # TODO: Confirm bootstrap desired
 _install: software-check
-ifneq ($(strip ${PLATFORM}),)
 	stow --verbose=2 -t ${HOME_DIR} ${SRC_DIR}
+ifneq ($(strip ${PLATFORM}),)  # If PLATFORM is defined and not empty...
 	[ ! -d ${PLATFORM_DIR}/${PLATFORM} ] || \
         stow --verbose=2 -d ${PLATFORM_DIR} -t ${HOME_DIR} ${PLATFORM}
 endif
