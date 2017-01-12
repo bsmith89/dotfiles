@@ -293,6 +293,10 @@ nnoremap : :set norelativenumber<CR>:
 nnoremap / :set norelativenumber<CR>/
 nnoremap ? :set norelativenumber<CR>?
 
+" set number
+" set numberwidth=3
+
+
 set colorcolumn=79
 
 " displays tabs with :set list & displays when a line runs off-screen
