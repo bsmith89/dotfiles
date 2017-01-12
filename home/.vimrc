@@ -588,6 +588,9 @@ nnoremap <Leader>v :split ~/.vimrc<CR>
 " Open after/ftplugin/ft.vim in a split
 nnoremap <Leader>b :split `="$HOME/.vim/after/ftplugin/" . &ft . ".vim"`<CR>
 
+" Open a terminal window on <Leader>t
+nnoremap <Leader>t :split<CR>:terminal<CR>
+
 " -----------------------------------------------------------------------------
 "  Plugin-Specific Configuration {{{2
 " -----------------------------------------------------------------------------
