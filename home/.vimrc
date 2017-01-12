@@ -246,6 +246,9 @@ set incsearch               " Incrementally search while typing a /regex
 " hide matches on <Leader>space
 nnoremap <Leader><space> :nohlsearch<CR>
 
+" on hitting side, move by just N characters
+set sidescroll=3
+
 " -----------------------------------------------------------------------------
 "  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
 " -----------------------------------------------------------------------------
