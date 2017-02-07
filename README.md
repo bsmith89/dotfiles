@@ -32,4 +32,11 @@ Restore original dotfiles in home directory
 
 ## NOTES
 
-For fixing problems maping <C-H> in vim, see https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
+-   For fixing problems maping <C-H> in vim, see https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
+-   To compile YCM plugin, I had to
+
+    ```bash
+    export EXTRA_CMAKE_ARGS='-DPYTHON_LIBRARY=$HOME/.linuxbrew/lib64/libpython2.7.so -DPYTHON_INCLUDE=$HOME/.linuxbrew/include/python2.7'
+    ```
+
+    before running the YCM install script: `$HOME/.linuxbrew/bin/python2 install.sh`.
