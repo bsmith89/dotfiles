@@ -10,6 +10,16 @@ alias egrep='egrep --color=auto'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+topall() {
+    while True
+    do
+        echo $1
+        top `pgrep "$1" | sed 's:^:-pid :'`
+        echo "Press ^C to quit for real."
+        sleep 0.75
+    done
+}
+
 # Safe copy and mv
 alias cp="cp -i"
 alias mv="mv -i"
