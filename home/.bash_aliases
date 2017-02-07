@@ -43,7 +43,7 @@ complete -F _todo td
 # Find backwards *up* the directory tree (towards root)
 find_up() {
     in=$(pwd)
-    find "$in" -maxdepth 1 -name "$@"
+    find -L "$in" -maxdepth 1 -name "$@"
     while [ "$in" != "/" ]; do
         in=$(dirname "$in")
         find "$in" -maxdepth 1 -name "$@"
