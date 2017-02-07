@@ -272,32 +272,32 @@ set synmaxcol=2048            " no syntax highlighting after 2048 columns
 " Use relative line numbering when focused on the pane/window in normal mode.
 " TODO: Show absolute number when I'm on the command line
 " is that even possible?
-set number
-set relativenumber
-augroup linenumbers
-    autocmd!
-    autocmd FocusLost * :set norelativenumber
-    autocmd FocusGained * :set relativenumber
-    autocmd InsertEnter * :set norelativenumber
-    autocmd InsertLeave * :set relativenumber
-    autocmd WinEnter * :set relativenumber
-    autocmd WinLeave * :set norelativenumber
-    autocmd CmdwinEnter * :set norelativenumber
-    autocmd CmdwinLeave * :set relativenumber
-    autocmd BufEnter * :set norelativenumber
-    autocmd BufLeave * :set relativenumber
-augroup END
-set numberwidth=1             " using only 1 column (and 1 space) while possible
+if has('relativenumber') || has('nvim')
+    set number
+    set relativenumber
+    augroup linenumbers
+        autocmd!
+        autocmd FocusLost * :set norelativenumber
+        autocmd FocusGained * :set relativenumber
+        autocmd InsertEnter * :set norelativenumber
+        autocmd InsertLeave * :set relativenumber
+        autocmd WinEnter * :set relativenumber
+        autocmd WinLeave * :set norelativenumber
+        autocmd CmdwinEnter * :set norelativenumber
+        autocmd CmdwinLeave * :set relativenumber
+        autocmd BufEnter * :set norelativenumber
+        autocmd BufLeave * :set relativenumber
+    augroup END
+    set numberwidth=1             " using only 1 column (and 1 space) while possible
 
-nnoremap : :set norelativenumber<CR>:
-nnoremap / :set norelativenumber<CR>/
-nnoremap ? :set norelativenumber<CR>?
+    nnoremap : :set norelativenumber<CR>:
+    nnoremap / :set norelativenumber<CR>/
+    nnoremap ? :set norelativenumber<CR>?
+endif
 
-" set number
-" set numberwidth=3
-
-
-set colorcolumn=79
+if has("colorcolumn") || has('nvim')
+    set colorcolumn=79
+endif
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:›―,eol:¬,trail:·,precedes:⋘,extends:⋙,nbsp:‿
@@ -332,7 +332,7 @@ set scrolloff=3             " Keep 3 context lines above and below the cursor
 set nowrap                  " don't wrap text
 set linebreak               " don't wrap text in the middle of a word
 
-if has("spell")
+if has("spell") || has('nvim')
     set spelllang=en_us
 endif
 nnoremap <Leader>s :setlocal spell!<CR>
