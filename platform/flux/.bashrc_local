@@ -1,5 +1,5 @@
-export SCRATCH=/scratch/schmidti_fluxm/bjsm
 export ALLOC=schmidti_fluxm
+export SCRATCH=/scratch/${ALLOC}/bjsm
 
 alias scratch="cd $SCRATCH"
 alias showqu="showq -u $USER"
