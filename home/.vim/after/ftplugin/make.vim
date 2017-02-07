@@ -1,3 +1,5 @@
 set wrap
 set linebreak
-set breakindent
+if exists("&breakindent")
+    set breakindent
+endif
