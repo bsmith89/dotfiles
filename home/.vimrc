@@ -168,8 +168,6 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/syntastic'
 
-Plug 'valloric/YouCompleteMe', {'do': './install.py'}
-"
 Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
@@ -611,22 +609,6 @@ let g:airline#extensions#tabline#show_buffers = 1
 " configure collapsing parent directories in buffer name:
 let g:airline#extensions#tabline#fnamecollapse = 1
 
-" Re: Plug:valloric/YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_collect_identifiers_from_tags_files       = 1
-let g:ycm_seed_identifiers_with_syntax              = 1
-let g:ycm_filepath_completion_use_working_dir       = 1
-
-" Re: Plug:eagletmt/neco-ghc
-let g:ycm_semantic_triggers = {
-    \ 'haskell': ['.']
-    \ }
-
-" Fix the UltiSnips/YCM key-binding conflict
-" Based on http://stackoverflow.com/a/22253548/1951857
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion   = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 " Re: Plug:ervandew/supertab
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
