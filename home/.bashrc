@@ -88,7 +88,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export MANPATH="$HOME/.local/share/man:$MANPATH"
 
 # Additonal LD_LIBRARY_PATH variables
-export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
 
 # Set it so that the 'v' shortcut uses vim instead of vi
 export EDITOR=vim

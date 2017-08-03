@@ -26,5 +26,5 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     source $(brew --prefix)/etc/bash_completion
 fi
 
-# added by Miniconda installer
-export PATH="/home/bjsm/miniconda/bin:$PATH"
+# # added by Miniconda installer
+# export PATH="/home/bjsm/miniconda/bin:$PATH"
