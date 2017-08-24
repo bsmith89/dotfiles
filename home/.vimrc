@@ -236,7 +236,9 @@ call plug#end()
 " -----------------------------------------------------------------------------
 
 let mapleader=","             " change the leader to be a comma vs slash
-set noesckeys                 " No <Esc> imappings.  Instant escape.
+if !has("nvim")
+    set noesckeys                 " No <Esc> imappings.  Instant escape.
+endif
 
 " -----------------------------------------------------------------------------
 "  Moving Around, Searching, and Patterns {{{2
