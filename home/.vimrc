@@ -168,6 +168,13 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'scrooloose/syntastic'
 
+" Plug 'valloric/YouCompleteMe', {'do': './install.py'}
+" ---OR---
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+endif
+
+
 Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
