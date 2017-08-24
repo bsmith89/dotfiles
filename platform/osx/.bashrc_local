@@ -62,3 +62,4 @@ alias qn="quicknote"
 # as well as /usr/local/opt/coreutils/libexec/gnubin
 # for the homebrew installation of core GNU utils.
 export PATH=/Library/TeX/texbin:$PATH
+export RSTUDIO_WHICH_R=/usr/local/bin/R
