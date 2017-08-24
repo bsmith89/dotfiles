@@ -343,7 +343,7 @@ set linebreak               " don't wrap text in the middle of a word
 if has("spell") || has('nvim')
     set spelllang=en_us
 endif
-nnoremap <Leader>s :setlocal spell!<CR>
+nnoremap <Leader>s :setlocal spell!<CR>:set spell?<CR>
 
 " Display the highlight group on F10
 noremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name")
