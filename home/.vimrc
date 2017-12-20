@@ -665,7 +665,7 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 
 " Make this work for .nvimrc_local, too.
 if !empty(glob("~/.vimrc_local"))
-   source $home/.vimrc_local
+   source $HOME/.vimrc_local
 endif
 
 " Run these things only once
