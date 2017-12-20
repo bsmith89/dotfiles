@@ -227,6 +227,8 @@ Plug 'chrisbra/csv.vim'
 Plug 'davidoc/todo.txt-vim'
 " --OR--
 " Plug '~/.vim/bundle/todo.txt-vim'
+"
+Plug 'ibab/vim-snakemake'
 
 
 " -----------------------------------------------------------------------------
