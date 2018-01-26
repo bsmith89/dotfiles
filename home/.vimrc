@@ -571,6 +571,9 @@ set wildmode=longest,list            " <Tab> cycles between all matching choices
 " -----------------------------------------------------------------------------
 "  Executing External Commands {{{2
 " -----------------------------------------------------------------------------
+if has('nvim')
+    let g:python3_host_prog=$HOME.'/.vim/.venv/bin/python3'
+endif
 
 " -----------------------------------------------------------------------------
 "  Make / Quickfix {{{2
