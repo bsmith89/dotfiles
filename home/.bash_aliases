@@ -40,6 +40,8 @@ complete -F _todo todo
 alias td="todo.sh"
 complete -F _todo td
 
+alias smake="snakemake"
+
 # Find backwards *up* the directory tree (towards root)
 find_up() {
     in=$(pwd)
@@ -92,4 +94,8 @@ cd_venv() {
         echo "$VIRTUAL_ENV DEACTIVATED" >&2
         deactivate
     fi
+}
+
+set_diff() {
+    diff <(sort $1 | uniq) <(sort $2 | uniq) | grep '^[><] ' | sort
 }
