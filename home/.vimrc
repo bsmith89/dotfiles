@@ -228,7 +228,7 @@ Plug 'davidoc/todo.txt-vim'
 " --OR--
 " Plug '~/.vim/bundle/todo.txt-vim'
 "
-Plug 'ibab/vim-snakemake'
+Plug 'ivan-krukov/vim-snakemake'
 
 
 " -----------------------------------------------------------------------------
@@ -336,6 +336,7 @@ colorscheme gruvbox
 hi SpellBad cterm=underline
 
 set cursorline              " have a line indicate the cursor location
+set cursorcolumn
 
 set scrolloff=3             " Keep 3 context lines above and below the cursor
 
