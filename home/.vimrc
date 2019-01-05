@@ -148,6 +148,7 @@ Plug 'benekastah/neomake'
 " -----------------------------------------------------------------------------
 
 Plug 'eagletmt/neco-ghc'
+Plug 'ElmCast/elm-vim'
 
 " -----------------------------------------------------------------------------
 "  Special Characters {{{2
@@ -156,6 +157,8 @@ Plug 'eagletmt/neco-ghc'
 " -----------------------------------------------------------------------------
 "  Miscellaneous {{{2
 " -----------------------------------------------------------------------------
+
+Plug 'vimwiki/vimwiki'
 
 " -----------------------------------------------------------------------------
 "  IDE {{{2
@@ -172,6 +175,7 @@ Plug 'scrooloose/syntastic'
 " ---OR---
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
+    Plug 'zchee/deoplete-jedi'
 endif
 
 
@@ -214,11 +218,14 @@ Plug 'tweekmonster/braceless.vim'
 " For just a few more recent commits (is this really necessary?)
 Plug 'tpope/vim-markdown'
 
-Plug 'lervag/vimtex'
-" --OR--
+" Plug 'vim-pandoc/vim-criticmarkup'
+
+"
 " Plug 'LaTeX-Box-Team/LaTeX-Box'
 " --OR--
-"Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
+" Plug 'vim-latex/vim-latex'
+" --OR--
+Plug 'lervag/vimtex'
 
 Plug 'chrisbra/csv.vim'
 
@@ -368,6 +375,9 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 " Open new splits below and to the right
 set splitbelow
 set splitright
+
+" Not clear why this one direction ain't working:
+nnoremap <C-j> :TmuxNavigateDown<CR>
 
 inoremap <C-h> <Esc>:TmuxNavigateLeft<CR>
 inoremap <C-j> <Esc>:TmuxNavigateDown<CR>
@@ -624,14 +634,21 @@ let g:airline#extensions#tabline#show_buffers = 1
 " configure collapsing parent directories in buffer name:
 let g:airline#extensions#tabline#fnamecollapse = 1
 
+" Autocompletion interoperation
 " Re: Plug:ervandew/supertab
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
 " Re: Plug:SirVer/ultisnips
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger       = "<Tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<Tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<S-Tab>"
+" let g:UltiSnipsExpandTrigger       = "<C-S>"
+" let g:UltiSnipsJumpForwardTrigger  = "<C-N>"
+" let g:UltiSnipsJumpBackwardTrigger = "<C-P>"
+
+" TODO: Do I need to add this back?
+" if has('nvim')
+" call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+" " call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
+" endif
 
 " Re: Plug:scrooloose/nerdtree
 let NERDTreeShowHidden=1
