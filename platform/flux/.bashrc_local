@@ -33,3 +33,6 @@ fi
 # # added by Miniconda installer
 # export PATH="/home/bjsm/miniconda/bin:$PATH"
 
+table() {
+    column -s'	' -t $1 | less -S
+}

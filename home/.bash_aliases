@@ -28,9 +28,6 @@ alias ..="cd .."
 alias nmsq="grep -c '^>'"
 alias view="vim -R"
 
-table() {
-    column -s'	' -t $1 | less -S
-}
 alias less="less -S"
 
 

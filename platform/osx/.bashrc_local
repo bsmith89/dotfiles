@@ -66,3 +66,7 @@ export PATH=/Library/TeX/texbin:$PATH
 alias scsv="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app"
 
 export RSTUDIO_WHICH_R=/usr/local/bin/R
+
+table() {
+    column -s'	' -t $1 | less -S
+}
