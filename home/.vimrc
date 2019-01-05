@@ -577,7 +577,7 @@ cnoremap W! w !sudo tee % >/dev/null
 "  Command Line Editing {{{2
 " -----------------------------------------------------------------------------
 set wildmenu                  " menu completion in command mode on <Tab>
-set wildmode=longest,list            " <Tab> cycles between all matching choices.
+set wildmode=longest,list     " <Tab> cycles between all matching choices.
 
 " -----------------------------------------------------------------------------
 "  Executing External Commands {{{2
