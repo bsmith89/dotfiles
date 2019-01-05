@@ -40,7 +40,7 @@ let g:tagbar_type_markdown = {
                 \ 'i:images'
             \ ],
     \ "sort" : 0
-    \ }
+\ }
 
 nmap <Leader>c o<!--<CR>--><Esc>O
 nmap <Leader>C O<!--<CR>--><Esc>O
