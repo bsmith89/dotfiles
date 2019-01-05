@@ -9,6 +9,9 @@ export PATH=/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:$PATH
 # for the homebrew installation of core GNU utils.
 export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 
+# Use keychain for ssh key passwords
+ssh-add -K 2>/dev/null
+
 export EDITOR=nvim
 alias vim='nvim'
 
