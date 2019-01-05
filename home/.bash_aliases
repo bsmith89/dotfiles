@@ -11,10 +11,12 @@ alias egrep='egrep --color=auto'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 topall() {
-    while True
+    status=0
+    while [ "$status" -eq 0 ]
     do
         echo $1
-        top `pgrep "$1" | sed 's:^:-pid :'`
+        top -pid `pgrep "$1" | sed '2,$s:^:-pid :'`
+        status=$?
         echo "Press ^C to quit for real."
         sleep 0.75
     done
