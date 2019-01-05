@@ -39,7 +39,7 @@ complete -F _todo todo
 alias td="todo.sh"
 complete -F _todo td
 
-alias smake="snakemake"
+alias smake="snakemake -p --notemp"
 
 # Find backwards *up* the directory tree (towards root)
 find_up() {
