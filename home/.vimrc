@@ -514,8 +514,8 @@ set shiftround              " rounds indent to a multiple of shiftwidth
 " -----------------------------------------------------------------------------
 "  Folding {{{2
 " -----------------------------------------------------------------------------
-set foldmethod=marker       " TODO: Does this affect all files, or just ones
-                            " where foldmethod isn't set?
+" set foldmethod=marker       " TODO: Does this affect all files, or just ones
+"                             " where foldmethod isn't set?
 
 function! FoldColumnToggle()
     if &foldcolumn > 0
