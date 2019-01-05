@@ -25,6 +25,7 @@ Restore original dotfiles in home directory
 + Vim
 	+ Thesaurus
 	+ Figure out path completion for several filetypes.
+	+ Automatically make virtualenv in .vim for neovim/jedi/etc. packages.
 + Git
 	+ portable difflatex
 + Bash

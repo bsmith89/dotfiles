@@ -2,6 +2,7 @@ SRC_DIR := home
 PLATFORM_DIR := platform
 HOME_DIR := ${HOME}
 REQUIRED := stow
+VIMVENV := ${HOME_DIR}/.vim/.venv
 
 
 ifndef PLATFORM
@@ -11,7 +12,7 @@ ifndef PLATFORM
 	PLATFORM := $(shell read -p "${PLATFORM_PROMPT} " RESPONSE; echo $$RESPONSE)
 endif
 
-install: _install tic
+install: _install tic vim-plugins ${VIMVENV}
 
 # TODO: Confirm bootstrap desired
 _install: software-check
@@ -34,4 +35,11 @@ software-check:
         || echo "$$command: NOT INSTALLED" ; \
     done
 
-.PHONY: tic install _install software-check
+${VIMVENV}:
+	make_venv ${VIMVENV}
+	${VIMVENV}/bin/pip install neovim jedi
+
+vim-plugins: ${VIMVENV}
+	vim +PlugInstall +quitall
+
+.PHONY: tic install _install software-check vim-plugins
