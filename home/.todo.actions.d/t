@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+action=$1
+shift
+
+[ "$action" = "usage" ] && {
+    echo "    $(basename $0) ITEM# TIME"
+    echo "      add or edit the t: tag."
+    echo ""
+    exit
+}
+
+item=$1
+shift
+t=$1
+
+line=$(sed "$item!d" "$TODO_FILE")
+
+t_line=$(sed "s/\( t:[0-9]*\|$\)/ t:$t/" <<<$line)
+
+$TODO_FULL_SH depri $item
+$TODO_FULL_SH replace $item "$t_line"
+
