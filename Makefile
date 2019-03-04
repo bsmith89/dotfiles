@@ -1,7 +1,7 @@
 SRC_DIR := home
 PLATFORM_DIR := platform
 HOME_DIR := ${HOME}
-REQUIRED := stow
+REQUIRED := stow python3
 VIMVENV := ${HOME_DIR}/.vim/.venv
 
 
@@ -36,7 +36,7 @@ software-check:
     done
 
 ${VIMVENV}:
-	python -m venv ${VIMVENV}
+	python3 -m venv ${VIMVENV}
 	${VIMVENV}/bin/pip install neovim jedi
 
 vim-plugins: ${VIMVENV}
