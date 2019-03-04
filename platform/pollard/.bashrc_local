@@ -1,3 +1,64 @@
+# Environmental configuration for the pollard lab servers.
 export TMPDIR=/tmp
+
+# HOME2 is a preferred install location.
+_HOME2=/var/tmp/$USER
+if [ -d "$_HOME2" ];
+then
+    export HOME2=$_HOME2
+else
+    echo "Local home directory not found on this computer." >&2
+    echo "Falling back to $HOME." >&2
+    echo "Perhaps you should \`rsync -r $HOME/home2 $_HOME2\`." >&2
+    export HOME2=$HOME
+fi
+
 alias topu='top -u $USER'
-eval $(/pollard/home/bsmith/.linuxbrew/bin/brew shellenv)
+
+export HOMEBREW_PREFIX="$HOME2/.linuxbrew"
+export HOMEBREW_CELLAR="$HOME2/.linuxbrew/Cellar"
+export HOMEBREW_REPOSITORY="$HOME2/.linuxbrew/Homebrew"
+export PATH="$HOME2/.linuxbrew/bin:$HOME2/.linuxbrew/sbin:$PATH"
+export MANPATH="$HOME2/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="$HOME2/.linuxbrew/share/info:$INFOPATH"
+if [ -d "$(brew --prefix)/etc/bash_completion.d" ]; then
+    source $(brew --prefix)/etc/bash_completion.d/*
+fi
+
+source "$HOME2/anaconda3/etc/profile.d/conda.sh"
+export PATH="$HOME2/anaconda3/bin:$PATH"
+
+# eval `ssh-agent -s`
+# export VIMINIT='let &runtimepath = "$HOME2/.vim" | source $MYVIMRC'
+# export MYVIMRC="$HOME/.vimrc"
+# ~/.bashrc
+
+# See https://development.robinwinslow.uk/2012/07/20/tmux-and-ssh-auto-login-with-ssh-agent-finally/
+if [ -z "$TMUX" ]; then
+    # we're not in a tmux session
+
+    if [ ! -z "$SSH_TTY" ]; then
+        # We logged in via SSH
+
+        # if ssh auth variable is missing
+        if [ -z "$SSH_AUTH_SOCK" ]; then
+            export SSH_AUTH_SOCK="$HOME/.ssh/.auth_socket"
+        fi
+
+        # if socket is available create the new auth session
+        if [ ! -S "$SSH_AUTH_SOCK" ]; then
+            `ssh-agent -a $SSH_AUTH_SOCK` > /dev/null 2>&1
+            echo $SSH_AGENT_PID > $HOME/.ssh/.auth_pid
+            # Add all default keys to ssh auth
+            ssh-add 2>/dev/null
+        fi
+
+        # if agent isn't defined, recreate it from pid file
+        if [ -z "$SSH_AGENT_PID" ]; then
+            export SSH_AGENT_PID=`cat $HOME/.ssh/.auth_pid`
+        fi
+
+        # Add all default keys to ssh auth
+        # ssh-add 2>/dev/null
+    fi
+fi
