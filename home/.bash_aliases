@@ -41,59 +41,6 @@ complete -F _todo td
 
 alias smake="snakemake -p --notemp"
 
-# Find backwards *up* the directory tree (towards root)
-find_up() {
-    in=$(pwd)
-    find -L "$in" -maxdepth 1 -name "$@"
-    while [ "$in" != "/" ]; do
-        in=$(dirname "$in")
-        find "$in" -maxdepth 1 -name "$@"
-    done
-}
-
-# Working with venv's
-export DEFAULT_VENV=.venv
-
-activate_venv() {
-    local venv="$1"
-    [ -z "$venv" ] && venv="$DEFAULT_VENV"
-    local dir=$(find_up $venv | head -n 1)
-    if [ -n "$dir" ]; then
-        if source "$dir/bin/activate"; then
-            return 0
-        else
-            echo >&2 "ERROR: $dir exists but cannot be activated."
-            return 1
-        fi
-    else
-        echo >&2 "ERROR: no directory $venv found"
-        return 1
-    fi
-}
-
-make_venv() {
-    local VENV="$1"
-    shift
-    [ -z "$VENV" ] && VENV="$DEFAULT_VENV"
-    python3 -m venv $@ $VENV
-    activate_venv $VENV
-}
-
-cd_venv() {
-    cd "$@"
-    START_ENV=$VIRTUAL_ENV
-    activate_venv 2>/dev/null
-    if [ "$?" = 0 ]; then
-        if [ "$START_ENV" != "$VIRTUAL_ENV" ]; then
-            echo "$VIRTUAL_ENV ACTIVATED" >&2
-        else
-            return 0
-        fi
-    elif [ -n "$VIRTUAL_ENV" ]; then
-        echo "$VIRTUAL_ENV DEACTIVATED" >&2
-        deactivate
-    fi
-}
 
 set_diff() {
     diff <(sort $1 | uniq) <(sort $2 | uniq) | grep '^[><] ' | sort

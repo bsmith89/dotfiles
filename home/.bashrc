@@ -74,13 +74,6 @@ esac
 
 ###################################################
 
-# Local Bash settings may want to set some environmental variables before the
-# .bashrc work begins.
-# Sourced again at the end so that various env-vars can be overriden.
-if [ -f $HOME/.bashrc_local ]; then
-    source $HOME/.bashrc_local
-fi
-
 # Additional PATH variables
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -95,11 +88,6 @@ export EDITOR=vim
 
 # Set it so that globbing includes hidden files but not the . and .. directories.
 export GLOBIGNORE=". .."
-
-# enable color support of ls and grep
-if command -v dircolors >/dev/null 2>&1; then
-    test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -145,17 +133,13 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # Local Bash settings:
-# Sourced here for the second time to override any changes made in .bashrc
 if [ -f $HOME/.bashrc_local ]; then
     source $HOME/.bashrc_local
 fi
 
-# Load either the contents of $VIRTUAL_ENV (e.g. if a tmux session is loaded)
-# or activate the default environment.
-if [ -n "$VIRTUAL_ENV" ]; then
-    source "$VIRTUAL_ENV/bin/activate"
-elif [[ -e $HOME/.virtualenvs/default/bin/activate ]]; then
-    source $HOME/.virtualenvs/default/bin/activate
+# enable color support of ls and grep
+if command -v dircolors >/dev/null 2>&1; then
+    test -r ~/.dir_colors && eval "$(dircolors -b ~/.dir_colors)" || eval "$(dircolors -b)"
 fi
 
 # # Is this necessary?
