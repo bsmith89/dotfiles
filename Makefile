@@ -36,7 +36,7 @@ software-check:
     done
 
 ${VIMVENV}:
-	make_venv ${VIMVENV}
+	python -m venv ${VIMVENV}
 	${VIMVENV}/bin/pip install neovim jedi
 
 vim-plugins: ${VIMVENV}
