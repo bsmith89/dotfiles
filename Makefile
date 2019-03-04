@@ -18,7 +18,7 @@ install: _install tic vim-plugins ${VIMVENV}
 _install: software-check
 	stow --verbose=2 -t ${HOME_DIR} ${SRC_DIR}
 ifneq ($(strip ${PLATFORM}),)  # If PLATFORM is defined and not empty...
-	[ ! -d ${PLATFORM_DIR}/${PLATFORM} ] || \
+	[ -d ${PLATFORM_DIR}/${PLATFORM} ] && \
         stow --verbose=2 -d ${PLATFORM_DIR} -t ${HOME_DIR} ${PLATFORM}
 endif
 
@@ -30,9 +30,8 @@ tic: terminfo/*
 
 software-check:
 	@for command in ${REQUIRED} ; do \
-        which $$command 2>&1 >/dev/null \
-        && echo "$$command: OK" \
-        || echo "$$command: NOT INSTALLED" ; \
+        (which $$command 2>&1 >/dev/null && echo "$$command: OK") \
+        || (echo "$$command: NOT INSTALLED" && false) ; \
     done
 
 ${VIMVENV}:
