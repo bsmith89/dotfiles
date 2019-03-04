@@ -1,0 +1,23 @@
+# Append /usr/local/bin to the front of the PATH for homebrew
+# as well as /usr/local/opt/coreutils/libexec/gnubin
+# for the homebrew installation of core GNU utils.
+# as well as the gnu-sed install.
+export PATH=$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH
+
+# Append /usr/local/opt/coreutils/libexec/gnuman to the MANPATH
+# for the homebrew installation of core GNU utils.
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+
+export EDITOR=vim
+alias vim='nvim'
+
+# See `brew info bash-completion`.
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+    # Add bashdefault completion for some programs that don't have it for an
+    # unknown reason.
+    for prog in 'vim' 'ls' 'make' 'rm'; do
+        `complete -p $prog | awk '{NF--; print $0}'` -o bashdefault $prog
+    done
+fi
+
