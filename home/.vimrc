@@ -1,27 +1,13 @@
 " My vim configuration
 "
-"
-" Plugins and options are organized loosely based on the order of
-" `:options`.
-"
 " See github.com/bsmith89/dotfiles for more information.
-
-
-"  First {{{1
-" -----------------------------------------------------------------------------
 
 " Anything that needs to happen before everything else.
 " nocompatible should NOT need to be set, because the mere presence of
 " a .vimrc indicates as much.
-" set nocompatible
+set nocompatible
 
-" -----------------------------------------------------------------------------
-"  Plugins {{{1
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Auto-Install 'junegunn/vim-plug' {{{2
-" -----------------------------------------------------------------------------
+"  Auto-Install 'junegunn/vim-plug'
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !mkdir -p ~/.vim/autoload
   silent !curl -fLo ~/.vim/autoload/plug.vim
@@ -29,216 +15,36 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall
 endif
 
-" }}}
 call plug#begin('~/.vim/bundle')
-" -----------------------------------------------------------------------------
-"  Moving Around, Searching, and Patterns {{{2
-" -----------------------------------------------------------------------------
-"Plug 'edsono/vim-matchit'
-Plug 'tpope/vim-rsi'
 
-" -----------------------------------------------------------------------------
-"  Displaying Text / Syntax, Highlighting, and Spelling  {{{2
-" -----------------------------------------------------------------------------
-" Plug 'flazz/vim-colorschemes'
-" Plug 'altercation/vim-colors-solarized'
-" " ---AND/OR---
-Plug 'morhetz/gruvbox'
-
-" -----------------------------------------------------------------------------
-"  Tags {{{2
-" -----------------------------------------------------------------------------
-" Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
-
-" -----------------------------------------------------------------------------
-"  Windows / Tabs {{{2
-" -----------------------------------------------------------------------------
-" TODO: Figure out why <C-H> doesn't work.
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'sjl/vitality.vim'
-
-" -----------------------------------------------------------------------------
-"  Terminal {{{2
-" -----------------------------------------------------------------------------
-Plug 'tmux-plugins/vim-tmux-focus-events'
-
-" -----------------------------------------------------------------------------
-"  Mouse {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Printing {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Messages and Info {{{2
-" -----------------------------------------------------------------------------
-Plug 'bling/vim-airline'
-Plug 'mhinz/vim-startify'
-
-" -----------------------------------------------------------------------------
-"  Selecting Text {{{2
-" -----------------------------------------------------------------------------
-"Plug 'terryma/vim-expand-region'
-
-" -----------------------------------------------------------------------------
-"  Editing Text {{{2
-" -----------------------------------------------------------------------------
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-speeddating'
-Plug 'godlygeek/tabular'
-
-"Plug 'sjl/gundo.vim'
-" ---OR---
-Plug 'mbbill/undotree'
-
-Plug 'wellle/targets.vim'  " Provides additional text objects
-
-" -----------------------------------------------------------------------------
-"  Tabstops and Indentation {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Folding {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Diff Mode {{{2
-" -----------------------------------------------------------------------------
-
-Plug 'jmcantrell/vim-diffchanges'
-
-" -----------------------------------------------------------------------------
-"  Mapping {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Reading and Writing Files {{{2
-" -----------------------------------------------------------------------------
-
-" Plug 'kien/ctrlp.vim'
-
-Plug 'scrooloose/nerdtree'
-
-" -----------------------------------------------------------------------------
-"  Swap File {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Command Line Editing {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Executing External Commands {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Make / Quickfix {{{2
-" -----------------------------------------------------------------------------
-
-" Plug 'tpope/vim-dispatch'
-" ---OR---
-Plug 'benekastah/neomake'
-" ---OR---
-" Plug 'pgdouyon/vim-accio'
-
-" -----------------------------------------------------------------------------
-"  Language {{{2
-" -----------------------------------------------------------------------------
-
-Plug 'eagletmt/neco-ghc'
-Plug 'ElmCast/elm-vim'
-
-" -----------------------------------------------------------------------------
-"  Special Characters {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Miscellaneous {{{2
-" -----------------------------------------------------------------------------
-
-Plug 'vimwiki/vimwiki'
-
-" -----------------------------------------------------------------------------
-"  IDE {{{2
-" -----------------------------------------------------------------------------
-" Plug 'jmcantrell/vim-virtualenv'  " This does not seem to work currently.
-"                                   " NO idea why.
-
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-
-Plug 'scrooloose/syntastic'
-
-" Plug 'valloric/YouCompleteMe', {'do': './install.py'}
-" ---OR---
-if has('nvim')
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-    Plug 'zchee/deoplete-jedi'
+" Load these plugins only when not using neovim
+if !has('nvim')
+  Plug 'noahfrederick/vim-neovim-defaults'
 endif
 
+" Load these plugins only when using neovim
+if has('nvim')
+endif
 
-Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
-
-" Plug 'jiangmiao/auto-pairs'
-" ---OR---
-Plug 'Raimondi/delimitMate'
-" ---OR---
-" Plug 'Townk/vim-autoclose'  " YCM claims that this causes bugs...
-
-Plug 'tpope/vim-surround'
-
-Plug 'godlygeek/tabular'
-
-"Plug 'scrooloose/nerdcommenter'
-" ---OR---
-Plug 'tomtom/tcomment_vim'
-" ---OR---
-"Plug 'tpope/vim-commentary'
-
-" Plug 'ivanov/vim-ipython'
-"
-" Plug 'jpalardy/vim-slime'
-
-Plug 'tweekmonster/braceless.vim'
-
-" -----------------------------------------------------------------------------
-"  File-Specific Plugins {{{2
-" -----------------------------------------------------------------------------
-"Plug 'plasticboy/vim-markdown'
-" --OR--
-"Plug 'gabrielelana/vim-markdown'
-" --OR--
-" Plug 'vim-pandoc/vim-pandoc'
-" Plug 'vim-pandoc/vim-pandoc-syntax'
-" --OR--
-" For just a few more recent commits (is this really necessary?)
-Plug 'tpope/vim-markdown'
-
-" Plug 'vim-pandoc/vim-criticmarkup'
-
-"
-" Plug 'LaTeX-Box-Team/LaTeX-Box'
-" --OR--
-" Plug 'vim-latex/vim-latex'
-" --OR--
-Plug 'lervag/vimtex'
-
-Plug 'chrisbra/csv.vim'
-
-" Plug 'freitass/todo.txt-vim'
-" --OR--
-Plug 'davidoc/todo.txt-vim'
-" --OR--
-" Plug '~/.vim/bundle/todo.txt-vim'
-"
-Plug 'ivan-krukov/vim-snakemake'
-
-
-" -----------------------------------------------------------------------------
+" Load these plugins always
+Plug 'morhetz/gruvbox'  " Colorscheme
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'sjl/vitality.vim'  " Apparently improves interaction with tmux/iterm
+Plug 'itchyny/lightline.vim'  " Better looking statusline
+Plug 'mbbill/undotree'  " Visualize the undo-tree
+Plug 'tpope/vim-surround'  " Add and remove parens/etc. in normal.
+Plug 'Raimondi/delimitMate'  " 
+Plug 'tomtom/tcomment_vim'  " Add/subtract commenting levels
+Plug 'chrisbra/csv.vim'  " CSV ft
+Plug 'ivan-krukov/vim-snakemake'  " Smake ft
+Plug 'tpope/vim-rsi'  " Use readline/emacs style cursor moving
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 call plug#end()
 " --------------------------------END Plugins--------------------------------- }-
 "  Configuration {{{1
@@ -314,7 +120,12 @@ endif
 
 if has("colorcolumn") || has('nvim')
     set colorcolumn=79
+
+    " Plug:morhetz/gruvbox
+    let g:gruvbox_italic=0
+    let g:gruvbox_undercurl=0
 endif
+colorscheme gruvbox
 
 " displays tabs with :set list & displays when a line runs off-screen
 set listchars=tab:›―,eol:¬,trail:·,precedes:⋘,extends:⋙,nbsp:‿
@@ -331,16 +142,6 @@ if has("gui_running")
 else
     set background=dark
 endif
-
-" colorscheme solarized
-" ---OR---
-" Re: Plug:morhetz/gruvbox
-let g:gruvbox_italic=0
-let g:gruvbox_undercurl=0
-colorscheme gruvbox
-" Only because this one thing isn't working.  This is short-term fix...
-" See: https://github.com/neovim/neovim/issues/2098
-hi SpellBad cterm=underline
 
 set cursorline              " have a line indicate the cursor location
 set cursorcolumn
@@ -376,14 +177,13 @@ set laststatus=2            " Always show statusline, even if only 1 window.
 set splitbelow
 set splitright
 
-" Not clear why this one direction ain't working:
-nnoremap <C-j> :TmuxNavigateDown<CR>
-
+" Plug:christoomey/vim-tmux-navigator
+" " Not clear why this one direction ain't working:
+" nnoremap <C-j> :TmuxNavigateDown<CR>
 inoremap <C-h> <Esc>:TmuxNavigateLeft<CR>
 inoremap <C-j> <Esc>:TmuxNavigateDown<CR>
 inoremap <C-k> <Esc>:TmuxNavigateUp<CR>
 inoremap <C-l> <Esc>:TmuxNavigateRight<CR>
-
 if exists(':tmap')
     tnoremap <C-h> <C-\><C-N>:TmuxNavigateLeft<CR>
     tnoremap <C-j> <C-\><C-N>:TmuxNavigateDown<CR>
@@ -426,10 +226,6 @@ if exists(':tmap')
 endif
 
 " -----------------------------------------------------------------------------
-"  Printing {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
 "  Messages and Info {{{2
 " -----------------------------------------------------------------------------
 " No bell beep or flash is wanted
@@ -444,9 +240,6 @@ set shortmess+=a            " Use [+]/[RO]/[w] for modified/readonly/written.
 set ruler                   " show the cursor position all the time
 
 set confirm                 " Y-N-C prompt if closing with unsaved changes.
-" -----------------------------------------------------------------------------
-"  Selecting Text {{{2
-" -----------------------------------------------------------------------------
 
 " -----------------------------------------------------------------------------
 "  Editing Text {{{2
@@ -454,6 +247,7 @@ set confirm                 " Y-N-C prompt if closing with unsaved changes.
 " don't select first item, follow typing in autocomplete
 set completeopt=menuone,longest,preview
 set pumheight=6             " Keep a small completion window
+let g:deoplete#enable_at_startup = 1
 
 set thesaurus+=$HOME/.vim/mthesaur.txt
 
@@ -475,20 +269,6 @@ vnoremap <Leader>S :s:\s\+$::<CR>
 " Carry out the macro stored in the @q
 nnoremap <Leader>q @q
 
-" " <Up>/<Down> to move the current line
-" " TODO: Is this really necessary?
-" nnoremap <Up> :move-2<CR>==
-" nnoremap <Down> :move+<CR>==
-
-" " Add lines above/below in normal mode
-" nnoremap <Left> O<Esc>
-" nnoremap <Right> o<Esc>
-" " TODO: Map <S-Left>/<S-Right> to remove lines above and below *as long as
-" " they're blank.
-" nmap <S-Left> k:'<,'>s:^\s\+$::<CR>
-" nmap <S-Right> j:'<,'>s:^\s\+$::<CR>
-" " TODO: How do I get this to work?
-
 nnoremap <Leader>p :set paste!<CR>
 
 " Break the current line at the cursor
@@ -497,8 +277,6 @@ nnoremap gK i<Enter><Esc>Vk=$
 
 " Remove pre-line-terminus whitespace
 nnoremap <Leader>S :%s:\s\+$::<Enter>
-
-
 
 " -----------------------------------------------------------------------------
 "  Tabstops and Indentation {{{2
@@ -514,8 +292,8 @@ set shiftround              " rounds indent to a multiple of shiftwidth
 " -----------------------------------------------------------------------------
 "  Folding {{{2
 " -----------------------------------------------------------------------------
-" set foldmethod=marker       " TODO: Does this affect all files, or just ones
-"                             " where foldmethod isn't set?
+set foldmethod=marker       " TODO: Does this affect all files, or just ones
+                            " where foldmethod isn't set?
 
 function! FoldColumnToggle()
     if &foldcolumn > 0
@@ -570,10 +348,6 @@ command! -bang Q :q<bang>
 cnoremap W! w !sudo tee % >/dev/null
 
 " -----------------------------------------------------------------------------
-"  Swap File {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
 "  Command Line Editing {{{2
 " -----------------------------------------------------------------------------
 set wildmenu                  " menu completion in command mode on <Tab>
@@ -585,19 +359,6 @@ set wildmode=longest,list     " <Tab> cycles between all matching choices.
 if has('nvim')
     let g:python3_host_prog=$HOME.'/.vim/.venv/bin/python3'
 endif
-
-" -----------------------------------------------------------------------------
-"  Make / Quickfix {{{2
-" -----------------------------------------------------------------------------
-nnoremap <Leader>m :w<CR>:Neomake!<CR>
-
-" -----------------------------------------------------------------------------
-"  Language {{{2
-" -----------------------------------------------------------------------------
-
-" -----------------------------------------------------------------------------
-"  Special Characters {{{2
-" -----------------------------------------------------------------------------
 
 " -----------------------------------------------------------------------------
 "  Miscellaneous {{{2
@@ -615,81 +376,21 @@ nnoremap <Leader>b :split `="$HOME/.vim/after/ftplugin/" . &ft . ".vim"`<CR>
 " Open a terminal window on <Leader>t
 nnoremap <Leader>t :split<CR>:terminal<CR>
 
-" -----------------------------------------------------------------------------
-"  Plugin-Specific Configuration {{{2
-" -----------------------------------------------------------------------------
-" Re: Plug:airblade/vim-gitgutter
-" vim-gitgutter will use Sign Column to set its color, reload it.
-call gitgutter#highlight#define_highlights()
-let g:gitgutter_max_signs=10000
-
-" Re: Plug:bling/vim-airline
-" enable/disable automatic population of the `g:airline_symbols` dictionary
-" with powerline symbols:
-let g:airline_powerline_fonts = 1
-" enable/disable enhanced tabline:
-let g:airline#extensions#tabline#enabled = 1
-" enable/disable displaying buffers with a single tab:
-let g:airline#extensions#tabline#show_buffers = 1
-" configure collapsing parent directories in buffer name:
-let g:airline#extensions#tabline#fnamecollapse = 1
-
-" Autocompletion interoperation
-" Re: Plug:ervandew/supertab
-let g:SuperTabDefaultCompletionType    = '<C-n>'
-let g:SuperTabCrMapping                = 0
-" Re: Plug:SirVer/ultisnips
-" better key bindings for UltiSnipsExpandTrigger
-" let g:UltiSnipsExpandTrigger       = "<C-S>"
-" let g:UltiSnipsJumpForwardTrigger  = "<C-N>"
-" let g:UltiSnipsJumpBackwardTrigger = "<C-P>"
-
-" TODO: Do I need to add this back?
-" if has('nvim')
-" call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-" " call deoplete#custom#source('dictionary', 'min_pattern_length', 4)
-" endif
-
-" Re: Plug:scrooloose/nerdtree
-let NERDTreeShowHidden=1
-nnoremap <Leader>f :NERDTreeToggle<CR>
-
-" Re: Plug:scrooloose/syntastic
-let g:syntastic_check_on_open=1
-let g:syntastic_auto_loc_list=0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_enable_signs=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_loc_list_height=8
-
-" Re: Plug:mbbill/undotree
+" Plug:mbbill/undotree
 nnoremap <Leader>u :UndotreeToggle<CR>
-
-" " Re: Plug:kien/ctrlp.vim
-" let g:ctrlp_show_hidden=1
-" let g:ctrlp_follow_symlinks=2
-
-" Re: Plug:'godlygeek/tabular'
-nnoremap <Leader>\ :Tabularize /\| <CR>
-
-" Re: Plug: 'jpalardy/vim-slime'
-let g:slime_target = "tmux"
-let g:slime_paste_file = tempname()
-let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
-
 
 " ---------------------------END Configuration---------------------------------
 " -----------------------------------------------------------------------------
 " Finally {{{1
 " -----------------------------------------------------------------------------
 
-" Make this work for .nvimrc_local, too.
 if !empty(glob("~/.vimrc_local"))
    source $HOME/.vimrc_local
 endif
 
+
 " Run these things only once
 if exists("b:did_vimrc") | finish | endif
 let b:did_vimrc = 1
+
 set encoding=utf-8
