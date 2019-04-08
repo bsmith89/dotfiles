@@ -10,34 +10,33 @@ Enjoy!
 ##Usage
 Place dotfiles in home directory
 
-	make install
+    make install
 
 Include platform specific files:
 
-	make install PLATFORM=[osx/flux/etc.]
+    make install PLATFORM=[osx/flux/etc.]
 
 Restore original dotfiles in home directory
 
-	make restore
+    make restore
 
 
 ##TODO
-+ Vim
-	+ Thesaurus
-	+ Figure out path completion for several filetypes.
-	+ Automatically make virtualenv in .vim for neovim/jedi/etc. packages.
-+ Git
-	+ portable difflatex
-+ Bash
-    + Don't source .bashrc and .bashrc\_local more than once.
+-   Vim
+    - Thesaurus
+    - Figure out path completion for several filetypes.
+    - Automatically make virtualenv in .vim for neovim/jedi/etc. packages.
+-   Git
+    - portable difflatex
+-   Bash
+    -   Don't source .bashrc and .bashrc_local more than once.
 
 ## NOTES
 
--   For fixing problems maping <C-H> in vim, see https://github.com/neovim/neovim/issues/2048#issuecomment-78045837
--   To compile YCM plugin, I had to
-
-    ```bash
-    export EXTRA_CMAKE_ARGS='-DPYTHON_LIBRARY=$HOME/.linuxbrew/lib64/libpython2.7.so -DPYTHON_INCLUDE=$HOME/.linuxbrew/include/python2.7'
-    ```
-
-    before running the YCM install script: `$HOME/.linuxbrew/bin/python2 install.sh`.
+-   I seem to have settled on some design principles:
+    -   Branches are not for different platforms (because merging is hard),
+    -   instead, everything in `home/` should be cross-platform (because somehow this is easier...?)
+    -   and `platform/` is used for specific code.
+    -   This project is not meant for bootstrapping installations, although
+        it does do some of that when necessary for getting a new system configured.
+        -   Perhaps I should make a `bootstrap` project to pair with it...?
