@@ -52,3 +52,5 @@ if [ -z "$TMUX" ]; then
         # ssh-add 2>/dev/null
     fi
 fi
+
+alias activate="source ./env"
