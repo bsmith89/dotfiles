@@ -17,6 +17,7 @@ fi
 source "$HOME/anaconda3/etc/profile.d/conda.sh"
 export PATH="$HOME/anaconda3/bin:$PATH"
 
+alias vim=nvim
 # eval `ssh-agent -s`
 # export VIMINIT='let &runtimepath = "$HOME/.vim" | source $MYVIMRC'
 # export MYVIMRC="$HOME/.vimrc"
