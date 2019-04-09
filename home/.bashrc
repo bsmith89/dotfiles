@@ -96,19 +96,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# These lines are required for virtualenvwrapper to work correctly
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Projects
-
-if [[ -e $HOME/.local/bin/virtualenvwrapper_lazy.sh ]]; then
-	source $HOME/.local/bin/virtualenvwrapper_lazy.sh
-fi
-
-# and these make virtualenv work the same way, even if not using
-# virtualenvwrapper
-export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_RESPECT_VIRTUALENV=true
-
 if [[ -e $HOME/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh ]]; then
    source $HOME/.vim/bundle/gruvbox/gruvbox_256palette_osx.sh
 fi
