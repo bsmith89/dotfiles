@@ -1,5 +1,7 @@
 # Environmental configuration for the pollard lab servers.
-export TMPDIR=/tmp
+export TMPDIR=/tmp/$USER
+mkdir -p $TMPDIR
+
 export DATA=/pollard/shattuck0/bsmith
 
 alias topu='top -u $USER'
