@@ -71,6 +71,9 @@ alias scsv="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Res
 table() {
     column -s'	' -t $1 | less -S
 }
+
 source "/anaconda3/etc/profile.d/conda.sh"
 
 alias rstudio="open /Applications/RStudio.app"
+
+alias activate="source ./env"
