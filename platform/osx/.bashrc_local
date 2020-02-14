@@ -69,7 +69,7 @@ alias scsv="open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Res
 
 
 table() {
-    column -s'	' -t $1 | less -S
+    align -s't' -g 2 $@ | less -S
 }
 
 source "/anaconda3/etc/profile.d/conda.sh"
