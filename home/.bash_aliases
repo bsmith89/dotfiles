@@ -21,6 +21,8 @@ topall() {
         sleep 0.75
     done
 }
+alias topu='top -u $USER'
+alias htopu='htop -u $USER'
 
 # Safe copy and mv
 alias cp="cp -i"
@@ -39,9 +41,15 @@ complete -F _todo todo
 alias td="todo.sh"
 complete -F _todo td
 
-alias smake="snakemake -p --notemp"
-
 
 set_diff() {
     diff <(sort $1 | uniq) <(sort $2 | uniq) | grep '^[><] ' | sort
+}
+
+serve_dir() {
+    python3 -m http.server $1 -d $2
+}
+
+table() {
+    column -s'	' -t $1 | less -S
 }
