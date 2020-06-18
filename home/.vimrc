@@ -205,6 +205,8 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'tweekmonster/braceless.vim'
 
+Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
 " -----------------------------------------------------------------------------
