@@ -72,7 +72,7 @@ table() {
     align -s't' -g 2 $@ | less -S
 }
 
-source "/anaconda3/etc/profile.d/conda.sh"
+source "/Users/byronsmith/anaconda3/etc/profile.d/conda.sh"
 
 alias rstudio="open /Applications/RStudio.app"
 
