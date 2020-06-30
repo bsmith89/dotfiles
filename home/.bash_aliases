@@ -29,11 +29,15 @@ alias cp="cp -i"
 alias mv="mv -i"
 alias psu="ps -u $USER"
 alias ..="cd .."
+alias topu='top -u $USER'
 alias nmsq="grep -c '^>'"
 alias view="vim -R"
 
 alias less="less -S"
 
+table() {
+    column -s'	' -t $1 | less -S
+}
 
 alias todo="todo.sh"
 complete -F _todo todo
