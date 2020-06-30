@@ -54,3 +54,17 @@ if [ -z "$TMUX" ]; then
 fi
 
 alias activate="source ./env"
+
+
+qdel_all() {
+    pat=${1:-/.*/}
+    del_details=$(qstat | sed '1,2d' | awk -v pat=pat '$5~pat')
+    echo "$del_details"
+    echo
+    echo "Are you sure you want to delete all jobs listed above?"
+    read -p "y/[n]: " response
+    if [ "$response" = "y" ]
+    then
+        echo "$del_details" | awk '{print $1}' | xargs qdel
+    fi
+            }
