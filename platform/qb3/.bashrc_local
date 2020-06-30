@@ -68,3 +68,5 @@ qdel_all() {
         echo "$del_details" | awk '{print $1}' | xargs qdel
     fi
             }
+
+export DRMAA_LIBRARY_PATH=/opt/sge/lib/lx-amd64/libdrmaa.so.1.0
