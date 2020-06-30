@@ -20,6 +20,9 @@ export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 export EDITOR=vim
 alias vim='nvim'
 
+source "$HOME/anaconda3/etc/profile.d/conda.sh"
+export PATH="$HOME/anaconda3/bin:$PATH"
+
 # See https://development.robinwinslow.uk/2012/07/20/tmux-and-ssh-auto-login-with-ssh-agent-finally/
 if [ -z "$TMUX" ]; then
     # we're not in a tmux session
