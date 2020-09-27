@@ -331,7 +331,7 @@ if has("gui_running")
     set guioptions-=T
     set guifont=Menlo\ for\ Powerline
 else
-    set background=dark
+    set background=light
 endif
 
 " colorscheme solarized
