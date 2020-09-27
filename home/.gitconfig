@@ -10,6 +10,8 @@
 	branch = auto
 	diff = auto
 	status = auto
+[color "diff"]
+	meta = blue bold
 # Based on
 # http://tex.stackexchange.com/questions/1325/using-latexdiff-with-git
 #[difftool.latex]
