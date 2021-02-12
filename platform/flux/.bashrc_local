@@ -7,7 +7,6 @@ mkdir -p ${TMPDIR}
 
 alias scratch="cd $SCRATCH"
 alias showqu="showq -u $USER"
-alias topu="top -u $USER"
 alias qstatr="qstat -u $USER -f | grep --color=never '\(Job Id\|Job_Name\|resources_\|Resource_\) '"
 alias qstatu="qstat -u $USER"
 

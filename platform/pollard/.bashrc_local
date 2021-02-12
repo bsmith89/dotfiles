@@ -2,19 +2,14 @@
 export TMPDIR=/tmp/$USER
 mkdir -p $TMPDIR
 
-export DATA=/pollard/shattuck0/bsmith
-
-alias topu='top -u $USER'
-
 export HOMEBREW_PREFIX="$HOME/.linuxbrew"
 export HOMEBREW_CELLAR="$HOME/.linuxbrew/Cellar"
 export HOMEBREW_REPOSITORY="$HOME/.linuxbrew/Homebrew"
 export PATH="$HOME/.linuxbrew/bin:$HOME/.linuxbrew/sbin:$PATH"
 export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
-if [ -d "$(brew --prefix)/etc/bash_completion.d" ]; then
-    source $(brew --prefix)/etc/bash_completion.d/*
-fi
+# Below line added as suggested by `brew info bash-completion`.
+[[ -r "/pollard/home/bsmith/.linuxbrew/etc/profile.d/bash_completion.sh" ]] && . "/pollard/home/bsmith/.linuxbrew/etc/profile.d/bash_completion.sh"
 
 source "$HOME/anaconda3/etc/profile.d/conda.sh"
 export PATH="$HOME/anaconda3/bin:$PATH"

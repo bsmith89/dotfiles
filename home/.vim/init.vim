@@ -179,10 +179,9 @@ if has('nvim')
 endif
 
 
-" FIXME: Using UltiSnips breaks using the <tab>-key, for some reason...?
-" Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
+Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'  " Default snippets for UltiSnips
 
 " Plug 'jiangmiao/auto-pairs'
 " ---OR---
@@ -206,9 +205,7 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'tweekmonster/braceless.vim'
 
-if has("nvim")
-    Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
-endif
+Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
 
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
@@ -241,9 +238,8 @@ Plug 'davidoc/todo.txt-vim'
 " Plug '~/.vim/bundle/todo.txt-vim'
 "
 Plug 'ivan-krukov/vim-snakemake'
-
-" Embed NeoVim in Chrome
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'snakemake/snakemake', {'rtp': 'misc/vim'}
+Plug 'snakemake/snakefmt'
 
 
 " -----------------------------------------------------------------------------
@@ -335,10 +331,9 @@ if has("gui_running")
     set guioptions-=m
     " Remove toolbar
     set guioptions-=T
-    set guifont=Menlo\ for\ Powerline:h20
+    set guifont=Menlo\ for\ Powerline
 else
-    set background=light
-    set guifont=Menlo\ for\ Powerline:h20
+    set background=dark
 endif
 
 " colorscheme solarized
@@ -591,9 +586,9 @@ set wildmode=longest,list     " <Tab> cycles between all matching choices.
 " -----------------------------------------------------------------------------
 "  Executing External Commands {{{2
 " -----------------------------------------------------------------------------
-" if has('nvim')
-"     let g:python3_host_prog=$HOME.'/.vim/.venv/bin/python3'
-" endif
+if has('nvim')
+    let g:python3_host_prog=$HOME.'/.vim/.venv/bin/python3'
+endif
 
 " -----------------------------------------------------------------------------
 "  Make / Quickfix {{{2
@@ -627,10 +622,10 @@ nnoremap <Leader>t :split<CR>:terminal<CR>
 " -----------------------------------------------------------------------------
 "  Plugin-Specific Configuration {{{2
 " -----------------------------------------------------------------------------
-" " Re: Plug:airblade/vim-gitgutter
-" " vim-gitgutter will use Sign Column to set its color, reload it.
-" call gitgutter#highlight#define_highlights()
-" let g:gitgutter_max_signs=10000
+" Re: Plug:airblade/vim-gitgutter
+" vim-gitgutter will use Sign Column to set its color, reload it.
+call gitgutter#highlight#define_highlights()
+let g:gitgutter_max_signs=10000
 
 " Re: Plug:bling/vim-airline
 " enable/disable automatic population of the `g:airline_symbols` dictionary
@@ -644,13 +639,14 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline#extensions#tabline#fnamecollapse = 1
 
 " Autocompletion interoperation
-" " Re: Plug:ervandew/supertab
-" let g:SuperTabDefaultCompletionType    = '<C-n>'
-" let g:SuperTabCrMapping                = 0
+" Re: Plug:ervandew/supertab
+let g:SuperTabDefaultCompletionType    = '<C-n>'
+let g:SuperTabCrMapping                = 0
 " Re: Plug:SirVer/ultisnips
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<C-n>"
-" let g:UltiSnipsJumpBackwardTrigger="<C-p>"
+" better key bindings for UltiSnipsExpandTrigger
+" let g:UltiSnipsExpandTrigger       = "<C-S>"
+" let g:UltiSnipsJumpForwardTrigger  = "<C-N>"
+" let g:UltiSnipsJumpBackwardTrigger = "<C-P>"
 
 " TODO: Do I need to add this back?
 " if has('nvim')
@@ -696,17 +692,6 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "1"}
 if !empty(glob("~/.vimrc_local"))
    source $HOME/.vimrc_local
 endif
-
-" FIXME: This should work, needed to set fontsize on firenvim
-" function! OnUIEnter(event)
-" 	let l:ui = nvim_get_chan_info(a:event.chan)
-" 	if has_key(l:ui, 'client') && has_key(l:ui.client, 'name')
-" 		if l:ui.client.name ==# 'Firenvim'
-" 			set guifont=Iosevka:h12
-" 		endif
-" 	endif
-" endfunction
-" autocmd QueInit UIEnter * call OnUIEnter(deepcopy(v:event))
 
 " Run these things only once
 if exists("b:did_vimrc") | finish | endif
