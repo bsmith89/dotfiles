@@ -57,3 +57,12 @@ serve_dir() {
 table() {
     column -s'	' -t $1 | less -S
 }
+
+ssh-fwd() {
+    port_start=$1
+    port_end=$2
+    shift 2
+    ssh \
+        $(for port in $(seq $port_start $port_end); do echo "-L localhost:$port:localhost:$port"; done) \
+        $@
+}
