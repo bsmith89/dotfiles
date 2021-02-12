@@ -205,7 +205,9 @@ Plug 'tomtom/tcomment_vim'
 
 Plug 'tweekmonster/braceless.vim'
 
-Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+if has("nvim")
+    Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+endif
 
 " -----------------------------------------------------------------------------
 "  File-Specific Plugins {{{2
@@ -331,9 +333,10 @@ if has("gui_running")
     set guioptions-=m
     " Remove toolbar
     set guioptions-=T
-    set guifont=Menlo\ for\ Powerline
+    set guifont=Menlo\ for\ Powerline:h20
 else
-    set background=dark
+    set background=light
+    set guifont=Menlo\ for\ Powerline:h20
 endif
 
 " colorscheme solarized
@@ -586,9 +589,9 @@ set wildmode=longest,list     " <Tab> cycles between all matching choices.
 " -----------------------------------------------------------------------------
 "  Executing External Commands {{{2
 " -----------------------------------------------------------------------------
-if has('nvim')
-    let g:python3_host_prog=$HOME.'/.vim/.venv/bin/python3'
-endif
+" if has('nvim')
+"     let g:python3_host_prog=$HOME.'/.vim/.venv/bin/python3'
+" endif
 
 " -----------------------------------------------------------------------------
 "  Make / Quickfix {{{2
@@ -622,10 +625,10 @@ nnoremap <Leader>t :split<CR>:terminal<CR>
 " -----------------------------------------------------------------------------
 "  Plugin-Specific Configuration {{{2
 " -----------------------------------------------------------------------------
-" Re: Plug:airblade/vim-gitgutter
-" vim-gitgutter will use Sign Column to set its color, reload it.
-call gitgutter#highlight#define_highlights()
-let g:gitgutter_max_signs=10000
+" " Re: Plug:airblade/vim-gitgutter
+" " vim-gitgutter will use Sign Column to set its color, reload it.
+" call gitgutter#highlight#define_highlights()
+" let g:gitgutter_max_signs=10000
 
 " Re: Plug:bling/vim-airline
 " enable/disable automatic population of the `g:airline_symbols` dictionary
