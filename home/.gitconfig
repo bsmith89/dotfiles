@@ -32,3 +32,8 @@
 	ls-other = ls-files --other --exclude-standard
 	grep-other = !git ls-other | git grep -f -
 	diff-cached = diff --cached
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
