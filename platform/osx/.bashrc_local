@@ -16,9 +16,6 @@ alias vim='nvim'
 
 alias top="top -o cpu"
 
-# Include Haskell bins
-export PATH=$HOME/.cabal/bin:$PATH
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/opt/X11/lib/pkgconfig
 
 # See `brew info bash-completion`.
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
