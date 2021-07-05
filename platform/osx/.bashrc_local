@@ -71,6 +71,12 @@ table() {
 
 source "/Users/byronsmith/anaconda3/etc/profile.d/conda.sh"
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
 alias rstudio="open /Applications/RStudio.app"
 
 alias activate="source ./env"
