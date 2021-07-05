@@ -174,10 +174,15 @@ Plug 'scrooloose/syntastic'
 " Plug 'valloric/YouCompleteMe', {'do': './install.py'}
 " ---OR---
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}
-    Plug 'zchee/deoplete-jedi'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
+let g:deoplete#enable_at_startup = 1
 
+Plug 'deoplete-plugins/deoplete-jedi'
 
 Plug 'ervandew/supertab'   " Makes YCM and UltiSnips work better together
 Plug 'SirVer/ultisnips'
