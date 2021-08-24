@@ -83,6 +83,9 @@ export MANPATH="$HOME/.local/share/man:$HOME/.local/usr/share/man:$MANPATH"
 # Additonal LD_LIBRARY_PATH variables
 export LD_LIBRARY_PATH="$HOME/.local/lib:$HOME/.local/usr/lib64:$LD_LIBRARY_PATH"
 
+# Additional PERL5 includes
+export PERL5LIB="$HOME/.local/usr/share/perl5:$PERL5LIB"
+
 # Set it so that the 'v' shortcut uses vim instead of vi
 export EDITOR=vim
 
