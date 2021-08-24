@@ -36,7 +36,7 @@ alias view="vim -R"
 alias less="less -S"
 
 table() {
-    column -s'	' -t $1 | less -S
+    column -s'	' -t "$1" | less -S
 }
 
 alias todo="todo.sh"
@@ -52,10 +52,6 @@ set_diff() {
 
 serve_dir() {
     python3 -m http.server $1 -d $2
-}
-
-table() {
-    column -s'	' -t $1 | less -S
 }
 
 ssh-fwd() {
