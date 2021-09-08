@@ -34,5 +34,5 @@ setlocal indentkeys-=:
 let b:slime_python_ipython = 1
 
 " Re: Plugin psf/black
-let g:black_linelength = 79
+" let g:black_linelength = 79
 let g:black_virtualenv = $HOME.'/.vim/.venv'
