@@ -221,11 +221,11 @@ endif
 " --OR--
 "Plug 'gabrielelana/vim-markdown'
 " --OR--
-" Plug 'vim-pandoc/vim-pandoc'
-" Plug 'vim-pandoc/vim-pandoc-syntax'
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'vim-pandoc/vim-pandoc-syntax'
 " --OR--
 " For just a few more recent commits (is this really necessary?)
-Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-markdown'
 
 " Plug 'vim-pandoc/vim-criticmarkup'
 
