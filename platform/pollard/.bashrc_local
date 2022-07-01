@@ -51,3 +51,5 @@ if [ -z "$TMUX" ]; then
 fi
 
 alias activate="source ./env"
+
+export DEFAULT_SNAKEMAKE_PROFILE='bueno'
