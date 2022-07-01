@@ -1,5 +1,5 @@
-# export TMPDIR=/scratch/$USER
-# mkdir -p $TMPDIR
+export TMPDIR=/scratch/$USER
+mkdir -p $TMPDIR
 
 
 export EDITOR=vim
