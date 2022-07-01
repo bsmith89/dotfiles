@@ -36,7 +36,7 @@ alias view="vim -R"
 alias less="less -S"
 
 table() {
-    column -s'	' -t "$1" | less -S
+    cat $1 | column -s'	' -t | less -S
 }
 
 alias todo="todo.sh"
