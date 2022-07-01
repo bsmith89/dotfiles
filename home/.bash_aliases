@@ -33,7 +33,7 @@ alias topu='top -u $USER'
 alias nmsq="grep -c '^>'"
 alias view="vim -R"
 
-alias less="less -S"
+alias less="less -Sr"
 
 table() {
     column -s'	' -t $1 | less -S
