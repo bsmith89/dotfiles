@@ -211,7 +211,7 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tweekmonster/braceless.vim'
 
 if has("nvim")
-    Plug 'psf/black', { 'commit': 'ce14fa8b497bae2b50ec48b3bd7022573a59cdb1' }
+    Plug 'psf/black'
 endif
 
 " -----------------------------------------------------------------------------
@@ -244,8 +244,8 @@ Plug 'davidoc/todo.txt-vim'
 " --OR--
 " Plug '~/.vim/bundle/todo.txt-vim'
 "
-Plug 'ivan-krukov/vim-snakemake'
-" Plug 'snakemake/snakemake', {'rtp': 'misc/vim'}
+" Plug 'ivan-krukov/vim-snakemake'
+Plug 'snakemake/snakemake', {'branch': 'main', 'rtp': 'misc/vim'}
 Plug 'snakemake/snakefmt'
 
 
