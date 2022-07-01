@@ -2,7 +2,8 @@
 
 tbl=$(mktemp)
 plines=$1
-qstat | awk -v OFS='	' 'NR!=2' > "$tbl"
+# qstat | awk -v OFS='	' 'NR!=2' > "$tbl"
+qstat-fullname.sh > "$tbl"
 nlines=$(cat $tbl | wc -l)
 awk -v nlines="$nlines" -v plines="$plines" \
     'NR<(plines / 2){print} \
