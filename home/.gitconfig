@@ -26,7 +26,7 @@
 	enabled = true
 	autoupdate = true
 [alias]
-	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit -n 20
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)' --abbrev-commit
 	wdiff = diff --color-words
 	s = status -uno
 	ls-other = ls-files --other --exclude-standard
