@@ -39,6 +39,6 @@ ${VIMVENV}:
 	${VIMVENV}/bin/pip install neovim jedi
 
 vim-plugins: ${VIMVENV}
-	vim +PlugInstall +quitall
+	nvim +PlugInstall +quitall
 
 .PHONY: tic install _install software-check vim-plugins
