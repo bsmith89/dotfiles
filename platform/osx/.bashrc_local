@@ -80,3 +80,6 @@ if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -
 alias rstudio="open /Applications/RStudio.app"
 
 alias activate="source ./env"
+alias make=gmake
+
+export DEFAULT_SNAKEMAKE_PROFILE='laptop'
