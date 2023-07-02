@@ -62,3 +62,7 @@ ssh-fwd() {
         $(for port in $(seq $port_start $port_end); do echo "-L localhost:$port:localhost:$port"; done) \
         $@
 }
+
+column-numbers() {
+head -1 $1 | tr '\t' '\n' | nl
+}
